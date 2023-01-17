@@ -8,7 +8,9 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.util.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
@@ -17,7 +19,13 @@ import org.slf4j.LoggerFactory
 import java.io.File
 import java.io.FileInputStream
 import java.lang.Double.max
+import java.nio.channels.FileChannel
+import java.nio.file.Paths
+import java.nio.file.StandardOpenOption
+import java.time.Instant
+import java.time.LocalDate
 import java.util.*
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.stream.IntStream.range
 
@@ -166,6 +174,8 @@ fun main()
 
     val prefix = "/tools.descartes.teastore.webui/"
 
+    val urlsToIgnoreInPlugins = listOf("/", "/logs/reset")
+
     ////////////////////////////////////////////////////////////////////////////
     // Ktor plugins
     ////////////////////////////////////////////////////////////////////////////
@@ -174,6 +184,11 @@ fun main()
         application.environment.log.info("simulateProcessingTimePlugin is installed!")
 
         onCall {call ->
+            if (call.request.path() in urlsToIgnoreInPlugins)
+            {
+                return@onCall
+            }
+
             if (call.isHandled)
             {
                 return@onCall
@@ -187,10 +202,11 @@ fun main()
 
             var total_sleep_time = 0.0
 
+            var elapsedTimeSeconds = stopwatch.elapsed().toMillis() / 1000.0
             var sleep_time_to_use = predictor.predictSleepTime(tid, foundCommand)
-            call.application.environment.log.debug("--> UID: $tid, $foundCommand: Elapsed time: ${stopwatch.elapsed().toMillis()}ms")
+            call.application.environment.log.debug("--> UID: $tid, $foundCommand: Elapsed time: ${elapsedTimeSeconds}s")
             call.application.environment.log.debug("--> UID: $tid, $foundCommand: Predicted processing time: ${sleep_time_to_use}s")
-            sleep_time_to_use -= stopwatch.elapsed().toMillis() / 1000.0
+            sleep_time_to_use -= elapsedTimeSeconds
             sleep_time_to_use = max(0.0, sleep_time_to_use)
 
             if (sleep_time_to_use > 0)
@@ -199,26 +215,25 @@ fun main()
                 delay((sleep_time_to_use * 1000).toLong())
                 total_sleep_time += sleep_time_to_use
 
-                for (i in range(1, 1))
+                for (i in range(1, 4))
                 {
+                    elapsedTimeSeconds = stopwatch.elapsed().toMillis() / 1000.0
                     var sleep_time_test = predictor.predictSleepTime(tid, foundCommand)
-                    call.application.environment.log.debug("--> UID: $tid, $foundCommand: Elapsed time: ${stopwatch.elapsed().toMillis()}ms")
-                    call.application.environment.log.debug("--> UID: $tid, $foundCommand: Predicted processing time: ${sleep_time_to_use}s")
-                    sleep_time_test -= stopwatch.elapsed().toMillis() / 1000.0
-                    sleep_time_test = max(0.0, sleep_time_test)
+                    call.application.environment.log.debug("--> UID: $tid, $foundCommand: Elapsed time: ${elapsedTimeSeconds}s")
+                    call.application.environment.log.debug("--> UID: $tid, $foundCommand: Predicted processing time: ${sleep_time_test}s")
+                    sleep_time_test -= elapsedTimeSeconds
+                    sleep_time_to_use = max(0.0, sleep_time_test)
 
-                    if (sleep_time_test <= total_sleep_time)
+                    if (sleep_time_to_use > 0)
                     {
-                        break
+                        call.application.environment.log.debug("--> UID: $tid, $foundCommand: Waiting for $sleep_time_to_use")
+                        delay((sleep_time_to_use * 1000).toLong())
+                        total_sleep_time += sleep_time_to_use
                     }
                     else
                     {
-                        sleep_time_to_use = sleep_time_test - total_sleep_time
+                        break
                     }
-
-                    call.application.environment.log.debug("--> UID: $tid, $foundCommand: Waiting for $sleep_time_to_use")
-                    delay((sleep_time_to_use * 1000).toLong())
-                    total_sleep_time += sleep_time_to_use
                 }
             }
             else
@@ -234,6 +249,11 @@ fun main()
         application.environment.log.info("trackParallelRequestsPlugin2 is installed!")
 
         onCall { call ->
+            if (call.request.path() in urlsToIgnoreInPlugins)
+            {
+                return@onCall
+            }
+
             if (call.isHandled)
             {
                 return@onCall
@@ -251,6 +271,11 @@ fun main()
         application.environment.log.info("trackParallelRequestsPlugin is installed!")
 
         onCall { call ->
+            if (call.request.path() in urlsToIgnoreInPlugins)
+            {
+                return@onCall
+            }
+
             if (call.isHandled)
             {
                 return@onCall
@@ -269,16 +294,15 @@ fun main()
         application.environment.log.info("extractCommandPlugin is installed!")
 
         onCall { call ->
+            if (call.request.path() in urlsToIgnoreInPlugins)
+            {
+                return@onCall
+            }
+
             call.application.environment.log.debug("extractCommandPlugin: onCall")
 
             val url = call.request.path()
             call.application.environment.log.debug(url)
-
-            if (url == "/")
-            {
-                call.respondText("Empty response")
-                return@onCall
-            }
 
             val command = if (url != prefix) url.removePrefix(prefix) else "index"
 
@@ -350,7 +374,7 @@ fun main()
     ////////////////////////////////////////////////////////////////////////////
     // Ktor server
     ////////////////////////////////////////////////////////////////////////////
-    embeddedServer(Netty, host = "0.0.0.0", port = 1337) {
+    val server = embeddedServer(Netty, host = "0.0.0.0", port = 1337) {
         install(addProcessTimeHeaderPlugin)
         install(addUniqueIdPlugin)
         install(extractCommandPlugin)
@@ -363,7 +387,19 @@ fun main()
 
         routing {
             get("/") {
-                call.application.environment.log.info("GET index")
+                call.application.environment.log.info("GET /")
+                call.respondText("Success")
+            }
+            get("/logs/reset") {
+                call.application.environment.log.info("reset logs")
+
+                withContext(Dispatchers.IO) {
+                    FileChannel
+                        .open(Paths.get("teastore-cmd_simulation.log"), StandardOpenOption.WRITE)
+                        .truncate(0)
+                        .close()
+                }
+
                 call.respondText("Success")
             }
             route(prefix) {
@@ -431,6 +467,10 @@ fun main()
                 }
             }
         }
-    }.start(wait = true)
+    }.start(wait = false)
+    Runtime.getRuntime().addShutdownHook(Thread {
+        server.stop(1, 5, TimeUnit.SECONDS)
+    })
+    Thread.currentThread().join()
 }
 
