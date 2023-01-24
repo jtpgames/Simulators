@@ -215,7 +215,7 @@ fun main()
                 delay((sleep_time_to_use * 1000).toLong())
                 total_sleep_time += sleep_time_to_use
 
-                for (i in range(1, 4))
+                for (i in range(1, 2))
                 {
                     elapsedTimeSeconds = stopwatch.elapsed().toMillis() / 1000.0
                     var sleep_time_test = predictor.predictSleepTime(tid, foundCommand)
