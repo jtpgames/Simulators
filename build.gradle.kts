@@ -4,7 +4,8 @@ plugins {
     kotlin("jvm") version "1.7.10"
     kotlin("plugin.serialization") version "1.7.10"
 
-    application
+    id("com.google.cloud.tools.jib") version "3.3.1"
+    id("io.ktor.plugin") version "2.2.3"
 }
 
 group = "me.juritomak"
@@ -31,10 +32,28 @@ tasks.test {
     useJUnitPlatform()
 }
 
+java.sourceCompatibility = JavaVersion.VERSION_11
+java.targetCompatibility = JavaVersion.VERSION_11
+
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
 }
 
 application {
     mainClass.set("MainKt")
+}
+
+ktor {
+    docker {
+        localImageName.set("teastore-simulator")
+        imageTag.set("0.0.1-preview")
+        jreVersion.set(io.ktor.plugin.features.JreVersion.JRE_11)
+        portMappings.set(listOf(
+            io.ktor.plugin.features.DockerPortMapping(
+                8080,
+                1337,
+                io.ktor.plugin.features.DockerPortMappingProtocol.TCP
+            )
+        ))
+    }
 }
