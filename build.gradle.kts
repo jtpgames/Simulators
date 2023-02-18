@@ -51,7 +51,12 @@ ktor {
         portMappings.set(listOf(
             io.ktor.plugin.features.DockerPortMapping(
                 8080,
-                1337,
+                8080,
+                io.ktor.plugin.features.DockerPortMappingProtocol.TCP
+            ),
+	    io.ktor.plugin.features.DockerPortMapping(
+                8081,
+                8080,
                 io.ktor.plugin.features.DockerPortMappingProtocol.TCP
             )
         ))

@@ -374,7 +374,7 @@ fun main()
     ////////////////////////////////////////////////////////////////////////////
     // Ktor server
     ////////////////////////////////////////////////////////////////////////////
-    val server = embeddedServer(Netty, host = "0.0.0.0", port = 1337) {
+    val server = embeddedServer(Netty, host = "0.0.0.0", port = 8080) {
         install(addProcessTimeHeaderPlugin)
         install(addUniqueIdPlugin)
         install(extractCommandPlugin)
