@@ -2,7 +2,7 @@
 <PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.4">
 	<Header>
 		<Application name="JPMML-SkLearn library" version="1.7.10"/>
-		<Timestamp>2023-02-15T18:25:53Z</Timestamp>
+		<Timestamp>2023-02-25T13:33:50Z</Timestamp>
 	</Header>
 	<MiningBuildTask>
 		<Extension name="repr">PMMLPipeline(steps=[('linear', LinearRegression())])</Extension>
@@ -20,10 +20,10 @@
 			<MiningField name="PR 3"/>
 			<MiningField name="Request Type"/>
 		</MiningSchema>
-		<RegressionTable intercept="5.964222362774829E-4">
-			<NumericPredictor name="PR 1" coefficient="-4.0731764819211944E-5"/>
-			<NumericPredictor name="PR 3" coefficient="0.010405135232058672"/>
-			<NumericPredictor name="Request Type" coefficient="-1.493228627768664E-4"/>
+		<RegressionTable intercept="-0.002027690585400435">
+			<NumericPredictor name="PR 1" coefficient="4.6971320974191136E-5"/>
+			<NumericPredictor name="PR 3" coefficient="0.0015539446824712798"/>
+			<NumericPredictor name="Request Type" coefficient="0.0016114197247244695"/>
 		</RegressionTable>
 	</RegressionModel>
 </PMML>
