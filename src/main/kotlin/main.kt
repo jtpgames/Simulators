@@ -168,8 +168,8 @@ inline fun <T : Any> getAttributeKeyFor(name: String): AttributeKey<T>
 fun main()
 {
     val predictor = Predictor(
-        "teastore_model_LR_25-02-2023.pmml",
-        "teastore_requests_mapping_25-02-2023.json"
+        "teastore_model_LR_26-02-2023.pmml",
+        "teastore_requests_mapping_26-02-2023.json"
     )
 
     val prefix = "/tools.descartes.teastore.webui/"
