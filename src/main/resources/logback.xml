@@ -5,9 +5,9 @@
         </encoder>
     </appender>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>teastore-cmd_simulation.log</file>
+        <file>${application-name}_simulation.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>teastore-cmd_simulation_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${application-name}_simulation_%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
             <totalSizeCap>3GB</totalSizeCap>
         </rollingPolicy>
