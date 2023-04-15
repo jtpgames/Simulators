@@ -11,8 +11,8 @@ fun main()
     configureLogging()
 
     val predictor = Predictor(
-        "gs_model_LR_03-11-2022.pmml",
-        "gs_requests_mapping_03-11-2022.json"
+        "gs_model_prod_workload.pmml",
+        "gs_requests_mapping_prod_workload.json"
     )
 
     val prefix = "/"
