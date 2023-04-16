@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.4">
+	<Header>
+		<Application name="JPMML-SkLearn library" version="1.7.10"/>
+		<Timestamp>2023-04-16T18:33:11Z</Timestamp>
+	</Header>
+	<MiningBuildTask>
+		<Extension name="repr">PMMLPipeline(steps=[('estimator', Ridge(alpha=10))])</Extension>
+	</MiningBuildTask>
+	<DataDictionary>
+		<DataField name="Response Time s" optype="continuous" dataType="double"/>
+		<DataField name="cmd" optype="continuous" dataType="double"/>
+		<DataField name="pr_1" optype="continuous" dataType="double"/>
+		<DataField name="pr_3" optype="continuous" dataType="double"/>
+	</DataDictionary>
+	<RegressionModel functionName="regression" algorithmName="sklearn.linear_model._ridge.Ridge">
+		<MiningSchema>
+			<MiningField name="Response Time s" usageType="target"/>
+			<MiningField name="cmd"/>
+			<MiningField name="pr_1"/>
+			<MiningField name="pr_3"/>
+		</MiningSchema>
+		<RegressionTable intercept="0.03933128574257061">
+			<NumericPredictor name="cmd" coefficient="2.350815903238175E-5"/>
+			<NumericPredictor name="pr_1" coefficient="-0.014709001011605664"/>
+			<NumericPredictor name="pr_3" coefficient="0.062391702187837524"/>
+		</RegressionTable>
+	</RegressionModel>
+</PMML>
