@@ -11,7 +11,7 @@ fun main()
     configureLogging()
 
     val predictor = Predictor(
-        "gs_model_prod_workload.pmml",
+        "gs_model_LR_03-11-2022.pmml",
         "gs_requests_mapping_prod_workload.json"
     )
 
@@ -29,6 +29,8 @@ fun main()
             connectionGroupSize = 2
             workerGroupSize = 2
             callGroupSize = 1
+            requestQueueLimit = 16
+            shareWorkGroup = false
         }*/
     ) {
         rastSimulationKtorPlugins.installAllPlugins(this)
