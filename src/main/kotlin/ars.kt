@@ -6,14 +6,48 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import java.util.concurrent.TimeUnit
 
+enum class ModelToUse
+{
+    // MASCOTS 2022 model
+    MASCOTS2022,
+    // EPEW 2023 model with ordinal encoding
+    EPEW2023_ORDINAL,
+    // EPEW 2023 model with target encoding
+    EPEW2023_TARGET
+}
+
+val MODEL_TO_USE: ModelToUse = ModelToUse.EPEW2023_TARGET
+
 fun main()
 {
     configureLogging()
 
-    val predictor = Predictor(
-        "gs_model_LR_03-11-2022.pmml",
-        "gs_requests_mapping_prod_workload.json"
-    )
+    val predictor = when (MODEL_TO_USE)
+    {
+        ModelToUse.MASCOTS2022 ->
+            Predictor(
+                "gs_model_LR_03-11-2022.pmml",
+                "gs_requests_mapping_prod_workload.json"
+            )
+
+        ModelToUse.EPEW2023_ORDINAL ->
+            Predictor(
+                "gs_model_Ridge_18-03-2023.pmml",
+                "gs_requests_mapping_Ridge_18-03-2023.json",
+                mapOf(
+                    Pair("PR 1", "pr_1"), Pair("PR 3", "pr_3"), Pair("Request Type", "cmd")
+                )
+            )
+
+        ModelToUse.EPEW2023_TARGET ->
+            Predictor(
+                "gs_model_Ridge_target_encoding_20-03-2023.pmml",
+                "gs_requests_mapping_Ridge_target_encoding_20-03-2023.json",
+                mapOf(
+                    Pair("PR 1", "pr_1"), Pair("PR 3", "pr_3"), Pair("Request Type", "cmd_target_encoding")
+                )
+            )
+    }
 
     val prefix = "/"
 

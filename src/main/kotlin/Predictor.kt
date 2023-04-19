@@ -11,10 +11,16 @@ import java.io.FileInputStream
 import java.util.concurrent.atomic.AtomicInteger
 
 @OptIn(ExperimentalSerializationApi::class)
-class Predictor(nameOfModel: String, nameOfMappingFile: String)
+class Predictor(
+    nameOfModel: String,
+    nameOfMappingFile: String,
+    private val featureNameMapping: Map<String, String> = mapOf(
+        Pair("PR 1", "PR 1"), Pair("PR 3", "PR 3"), Pair("Request Type", "Request Type")
+    )
+)
 {
     private val evaluator: Evaluator
-    val knownRequestTypes: Map<String, Int>
+    val knownRequestTypes: Map<String, Double>
 
     private val log = LoggerFactory.getLogger(javaClass)
 
@@ -56,12 +62,12 @@ class Predictor(nameOfModel: String, nameOfMappingFile: String)
 
     fun predictSleepTime(tid: String, command: String): Double
     {
-        val requestTypeAsInt = knownRequestTypes.getOrDefault(command, 0)
+        val requestTypeAsNumber = knownRequestTypes.getOrDefault(command, 0)
 
         val inputMap = mapOf(
-            Pair("PR 1", startedCommands.getOrDefault(tid, StartedCommand()).parallelCommandsStart),
-            Pair("PR 3", startedCommands.getOrDefault(tid, StartedCommand()).parallelCommandsFinished),
-            Pair("Request Type", requestTypeAsInt)
+            Pair(featureNameMapping.getValue("PR 1"), startedCommands.getOrDefault(tid, StartedCommand()).parallelCommandsStart),
+            Pair(featureNameMapping.getValue("PR 3"), startedCommands.getOrDefault(tid, StartedCommand()).parallelCommandsFinished),
+            Pair(featureNameMapping.getValue("Request Type"), requestTypeAsNumber)
         )
 
         log.debug("-> UID: $tid, X: $inputMap -")
@@ -102,7 +108,7 @@ class Predictor(nameOfModel: String, nameOfMappingFile: String)
         }
     }
 
-    private inline fun predict(inputMap: Map<String, Int>): Double
+    private inline fun predict(inputMap: Map<String, Number>): Double
     {
         val prediction = evaluator.evaluate(inputMap)
 
