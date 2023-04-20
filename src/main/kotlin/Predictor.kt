@@ -29,8 +29,8 @@ class Predictor(
 
     init
     {
-        val pathToModel = this.javaClass.getResource(nameOfModel).path
-        val pathToMapping = this.javaClass.getResource(nameOfMappingFile).path
+        val pathToModel = "src/main/resources/$nameOfModel"
+        val pathToMapping = "src/main/resources/$nameOfMappingFile"
 
         knownRequestTypes = Json.decodeFromStream(FileInputStream(pathToMapping))
         log.debug(knownRequestTypes.toString())
