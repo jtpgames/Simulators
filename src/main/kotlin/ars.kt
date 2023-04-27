@@ -16,7 +16,7 @@ enum class ModelToUse
     EPEW2023_TARGET
 }
 
-val MODEL_TO_USE: ModelToUse = ModelToUse.EPEW2023_TARGET
+val MODEL_TO_USE: ModelToUse = ModelToUse.MASCOTS2022
 
 fun main()
 {
