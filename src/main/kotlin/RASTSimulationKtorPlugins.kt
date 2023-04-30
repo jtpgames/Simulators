@@ -168,6 +168,13 @@ class RASTSimulationKtorPlugins(
                     sleep_time_test -= elapsedTimeSeconds
                     sleep_time_to_use = max(0.0, sleep_time_test)
 
+                    val epsilon = 1E-4
+                    if (sleep_time_to_use <= epsilon)
+                    {
+                        call.application.environment.log.debug("--> UID: $tid, $foundCommand: $sleep_time_to_use <= $epsilon")
+                        sleep_time_to_use = 0.0
+                    }
+
                     if (sleep_time_to_use > 0)
                     {
                         call.application.environment.log.debug("--> UID: $tid, $foundCommand: Waiting for $sleep_time_to_use")

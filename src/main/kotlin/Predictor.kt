@@ -1,3 +1,4 @@
+import kotlinx.coroutines.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
@@ -9,13 +10,19 @@ import org.slf4j.LoggerFactory
 import java.io.File
 import java.io.FileInputStream
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 
 @OptIn(ExperimentalSerializationApi::class)
 class Predictor(
     nameOfModel: String,
     nameOfMappingFile: String,
     private val featureNameMapping: Map<String, String> = mapOf(
-        Pair("PR 1", "PR 1"), Pair("PR 3", "PR 3"), Pair("Request Type", "Request Type")
+        Pair("PR 1", "PR 1"),
+        Pair("PR 3", "PR 3"),
+        Pair("Request Type", "Request Type"),
+        Pair("RPS", "RPS"),
+        Pair("RPM", "RPM")
     )
 )
 {
@@ -24,8 +31,13 @@ class Predictor(
 
     private val log = LoggerFactory.getLogger(javaClass)
 
-    private var numberOfParallelRequestsPending: AtomicInteger = AtomicInteger(0)
+    private val numberOfParallelRequestsPending: AtomicInteger = AtomicInteger(0)
     val startedCommands = mutableMapOf<String, StartedCommand>()
+
+    private val requests_per_second: AtomicInteger = AtomicInteger(0)
+    private val requests_per_minute: AtomicInteger = AtomicInteger(0)
+
+    private val reset_requests_per_time: Job
 
     init
     {
@@ -58,6 +70,25 @@ class Predictor(
         val outputFields: List<OutputField> = evaluator.outputFields
         log.debug("Output fields count: ${outputFields.size}")
         log.debug("Output fields: $outputFields")
+
+        @OptIn(DelicateCoroutinesApi::class)
+        reset_requests_per_time = GlobalScope.launch {
+            launch {
+                while (true)
+                {
+                    delay(1.seconds)
+                    requests_per_second.set(0)
+                }
+            }
+
+            launch {
+                while (true)
+                {
+                    delay(1.minutes)
+                    requests_per_minute.set(0)
+                }
+            }
+        }
     }
 
     fun predictSleepTime(tid: String, command: String): Double
@@ -67,6 +98,8 @@ class Predictor(
         val inputMap = mapOf(
             Pair(featureNameMapping.getValue("PR 1"), startedCommands.getOrDefault(tid, StartedCommand()).parallelCommandsStart),
             Pair(featureNameMapping.getValue("PR 3"), startedCommands.getOrDefault(tid, StartedCommand()).parallelCommandsFinished),
+            Pair(featureNameMapping.getValue("RPS"), requests_per_second.get()),
+            Pair(featureNameMapping.getValue("RPM"), requests_per_minute.get()),
             Pair(featureNameMapping.getValue("Request Type"), requestTypeAsNumber)
         )
 
@@ -80,6 +113,9 @@ class Predictor(
     fun addNewStartedCommand(tid: String, command: String)
     {
         val numberOfParallelRequestsAtBeginning = numberOfParallelRequestsPending.getAndIncrement()
+
+        requests_per_second.incrementAndGet()
+        requests_per_minute.incrementAndGet()
 
         logStartCommand(tid, command)
 
