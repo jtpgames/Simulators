@@ -40,7 +40,7 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClass.set("ArsKt")
+    mainClass.set("TeaStoreKt")
 }
 
 ktor {

@@ -15,8 +15,8 @@ import java.util.stream.IntStream.range
 fun main()
 {
     val predictor = Predictor(
-        "teastore_model_LR_26-02-2023.pmml",
-        "teastore_requests_mapping_26-02-2023.json"
+        "teastore_model_LR_30-04-2023.pmml",
+        "teastore_requests_mapping_LR_30-04-2023.json"
     )
 
     val prefix = "/tools.descartes.teastore.webui/"
