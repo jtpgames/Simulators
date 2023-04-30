@@ -7,6 +7,8 @@ import java.nio.file.Paths
 
 private var auditLogger: Logger? = null
 
+var NameOfLogfile = "simulation.log"
+
 fun configureLogging(applicationName: String)
 {
     val ctx = LoggerFactory.getILoggerFactory() as LoggerContext
@@ -23,6 +25,8 @@ fun configureLogging(applicationName: String)
 
     // HACK: remove the log file implicitly created by the LoggerFactory.getILoggerFactory() call
     Files.deleteIfExists(Paths.get("application-name_IS_UNDEFINED_simulation.log"))
+
+    NameOfLogfile = "${applicationName}_simulation.log"
 
     auditLogger = LoggerFactory.getLogger("Audit")
 }

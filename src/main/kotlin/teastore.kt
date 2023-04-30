@@ -46,7 +46,7 @@ fun main()
 
                 withContext(Dispatchers.IO) {
                     FileChannel
-                        .open(Paths.get("teastore-cmd_simulation.log"), StandardOpenOption.WRITE)
+                        .open(Paths.get(NameOfLogfile), StandardOpenOption.WRITE)
                         .truncate(0)
                         .close()
                 }
