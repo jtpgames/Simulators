@@ -41,18 +41,7 @@ fun main()
                 call.application.environment.log.info("GET /")
                 call.respondText("Success")
             }
-            get("/logs/reset") {
-                call.application.environment.log.info("reset logs")
 
-                withContext(Dispatchers.IO) {
-                    FileChannel
-                        .open(Paths.get(NameOfLogfile), StandardOpenOption.WRITE)
-                        .truncate(0)
-                        .close()
-                }
-
-                call.respondText("Success")
-            }
             route(prefix) {
                 get("") {
                     call.application.environment.log.info("GET index")
@@ -119,8 +108,30 @@ fun main()
             }
         }
     }.start(wait = false)
+    val logsserver = embeddedServer(Netty, host = "0.0.0.0", port = 8081) {
+        install(CallLogging) {
+            disableDefaultColors()
+        }
+
+        routing {
+            get("/logs/reset") {
+                call.application.environment.log.info("reset logs")
+
+                withContext(Dispatchers.IO) {
+                    FileChannel
+                        .open(Paths.get("teastore_simulation.log"), StandardOpenOption.WRITE)
+                        .truncate(0)
+                        .close()
+                }
+
+                call.respondText("Success")
+            }
+        }
+    }.start(wait = false)
+
     Runtime.getRuntime().addShutdownHook(Thread {
         server.stop(1, 5, TimeUnit.SECONDS)
+        logsserver.stop(1, 5, TimeUnit.SECONDS)
     })
     Thread.currentThread().join()
 }
