@@ -20,7 +20,7 @@ val MODEL_TO_USE: ModelToUse = ModelToUse.MASCOTS2022
 
 fun main()
 {
-    configureLogging()
+    configureLogging("ars")
 
     val predictor = when (MODEL_TO_USE)
     {

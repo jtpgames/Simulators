@@ -14,6 +14,8 @@ import java.util.stream.IntStream.range
 
 fun main()
 {
+    configureLogging("teastore")
+
     val predictor = Predictor(
         "teastore_model_LR_30-04-2023.pmml",
         "teastore_requests_mapping_LR_30-04-2023.json"

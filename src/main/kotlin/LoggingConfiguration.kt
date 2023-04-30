@@ -7,7 +7,7 @@ import java.nio.file.Paths
 
 private var auditLogger: Logger? = null
 
-fun configureLogging()
+fun configureLogging(applicationName: String)
 {
     val ctx = LoggerFactory.getILoggerFactory() as LoggerContext
     val jc = JoranConfigurator()
@@ -18,7 +18,7 @@ fun configureLogging()
     // property of the LoggerContext
     // inject the name of the current application as "application-name"
     // property of the LoggerContext
-    ctx.putProperty("application-name", "ars")
+    ctx.putProperty("application-name", applicationName)
     jc.doConfigure(object {}.javaClass.getResource("logback.xml"))
 
     // HACK: remove the log file implicitly created by the LoggerFactory.getILoggerFactory() call
