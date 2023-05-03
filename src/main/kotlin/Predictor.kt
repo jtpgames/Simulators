@@ -95,13 +95,28 @@ class Predictor(
     {
         val requestTypeAsNumber = knownRequestTypes.getOrDefault(command, 0)
 
-        val inputMap = mapOf(
-            Pair(featureNameMapping.getValue("PR 1"), startedCommands.getOrDefault(tid, StartedCommand()).parallelCommandsStart),
-            Pair(featureNameMapping.getValue("PR 3"), startedCommands.getOrDefault(tid, StartedCommand()).parallelCommandsFinished),
-            Pair(featureNameMapping.getValue("RPS"), requests_per_second.get()),
-            Pair(featureNameMapping.getValue("RPM"), requests_per_minute.get()),
-            Pair(featureNameMapping.getValue("Request Type"), requestTypeAsNumber)
-        )
+        val inputFields = evaluator.inputFields.map { it.name }
+        val inputMap = mutableMapOf<String, Number>()
+        if (inputFields.contains("PR 1"))
+        {
+            inputMap[featureNameMapping.getValue("PR 1")] = startedCommands.getOrDefault(tid, StartedCommand()).parallelCommandsStart
+        }
+        if (inputFields.contains("PR 3"))
+        {
+            inputMap[featureNameMapping.getValue("PR 3")] = startedCommands.getOrDefault(tid, StartedCommand()).parallelCommandsFinished
+        }
+        if (inputFields.contains("RPS"))
+        {
+            inputMap[featureNameMapping.getValue("RPS")] = requests_per_second.get()
+        }
+        if (inputFields.contains("RPM"))
+        {
+            inputMap[featureNameMapping.getValue("RPM")] = requests_per_minute.get()
+        }
+        if (inputFields.contains("Request Type"))
+        {
+            inputMap[featureNameMapping.getValue("Request Type")] = requestTypeAsNumber
+        }
 
         log.debug("-> UID: $tid, X: $inputMap -")
         val y = predict(inputMap)

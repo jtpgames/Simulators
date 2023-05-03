@@ -1,0 +1,2746 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.4">
+	<Header>
+		<Application name="JPMML-SkLearn library" version="1.7.10"/>
+		<Timestamp>2023-05-03T18:02:55Z</Timestamp>
+	</Header>
+	<MiningBuildTask>
+		<Extension name="repr">PMMLPipeline(steps=[('estimator', GridSearchCV(estimator=DecisionTreeRegressor(),
+             param_grid={'criterion': ['squared_error', 'friedman_mse'],
+                         'max_depth': [8, 10, 12, 14]},
+             verbose=3))])</Extension>
+	</MiningBuildTask>
+	<DataDictionary>
+		<DataField name="Response Time s" optype="continuous" dataType="double"/>
+		<DataField name="PR 1" optype="continuous" dataType="float"/>
+		<DataField name="Request Type" optype="continuous" dataType="float"/>
+		<DataField name="RPS" optype="continuous" dataType="float"/>
+		<DataField name="RPM" optype="continuous" dataType="float"/>
+	</DataDictionary>
+	<TreeModel functionName="regression" algorithmName="sklearn.tree._classes.DecisionTreeRegressor" missingValueStrategy="nullPrediction" noTrueChildStrategy="returnLastPrediction">
+		<MiningSchema>
+			<MiningField name="Response Time s" usageType="target"/>
+			<MiningField name="PR 1"/>
+			<MiningField name="Request Type"/>
+			<MiningField name="RPM"/>
+			<MiningField name="RPS"/>
+		</MiningSchema>
+		<LocalTransformations>
+			<DerivedField name="double(PR 1)" optype="continuous" dataType="double">
+				<FieldRef field="PR 1"/>
+			</DerivedField>
+			<DerivedField name="double(Request Type)" optype="continuous" dataType="double">
+				<FieldRef field="Request Type"/>
+			</DerivedField>
+			<DerivedField name="double(RPM)" optype="continuous" dataType="double">
+				<FieldRef field="RPM"/>
+			</DerivedField>
+			<DerivedField name="double(RPS)" optype="continuous" dataType="double">
+				<FieldRef field="RPS"/>
+			</DerivedField>
+		</LocalTransformations>
+		<Node score="0.017">
+			<True/>
+			<Node score="0.017666666666666667">
+				<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="30.5"/>
+				<Node score="0.011259259259259266">
+					<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="2.5"/>
+					<Node score="0.005859322033898268">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="13.5"/>
+						<Node score="0.0037560073937153156">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="6.5"/>
+							<Node score="0.0053333333333333375">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="7641.5"/>
+								<Node score="0.003794952681388007">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="3.5"/>
+									<Node score="0.027470588235294118">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="95.5"/>
+										<Node score="0.005266773162939265">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="93.0"/>
+											<Node score="0.005684389911383749">
+												<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="1.5"/>
+												<Node score="0.004743863393809986">
+													<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="54.5"/>
+												</Node>
+											</Node>
+											<Node score="0.007015511892450835">
+												<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="2414.0"/>
+											</Node>
+										</Node>
+										<Node score="0.005875">
+											<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="1.0"/>
+											<Node score="0.004090909090909092">
+												<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="1.5"/>
+											</Node>
+										</Node>
+										<Node score="0.012066666666666668">
+											<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="0.5"/>
+										</Node>
+									</Node>
+									<Node score="0.004923344947735172">
+										<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="1.5"/>
+										<Node score="0.004525787965616021">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="257.5"/>
+											<Node score="0.004067039106145255">
+												<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="2578.0"/>
+											</Node>
+										</Node>
+										<Node score="0.007314285714285716">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="276.0"/>
+										</Node>
+									</Node>
+									<Node score="0.005771929824561407">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="172.5"/>
+										<Node score="0.0022195121951219523">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="1461.0"/>
+										</Node>
+									</Node>
+									<Node score="0.0024800000000000013">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="3980.0"/>
+									</Node>
+								</Node>
+								<Node score="0.010786885245901644">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="76.5"/>
+									<Node score="0.007842975206611577">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="3971.5"/>
+										<Node score="0.013000000000000003">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="1528.5"/>
+											<Node score="0.007704545454545459">
+												<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="68.5"/>
+											</Node>
+										</Node>
+										<Node score="0.006333333333333338">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="45.0"/>
+										</Node>
+									</Node>
+									<Node score="0.007521739130434785">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="65.5"/>
+										<Node score="0.0351764705882353">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="4498.5"/>
+										</Node>
+									</Node>
+									<Node score="0.005956521739130435">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="70.0"/>
+									</Node>
+								</Node>
+								<Node score="0.00894520547945205">
+									<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="1.5"/>
+									<Node score="0.005529411764705859">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="241.5"/>
+										<Node score="0.007230769230769236">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="86.5"/>
+										</Node>
+									</Node>
+									<Node score="0.006912280701754382">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5981.5"/>
+									</Node>
+								</Node>
+								<Node score="0.0034615384615384642">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="4498.5"/>
+									<Node score="0.00635714285714286">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="2414.0"/>
+									</Node>
+								</Node>
+								<Node score="0.008971428571428575">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="145.0"/>
+								</Node>
+							</Node>
+							<Node score="0.008149606299212603">
+								<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="1.5"/>
+								<Node score="0.0047372307692307115">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="3.5"/>
+									<Node score="0.004508108108108111">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="2.5"/>
+										<Node score="0.004174284774745149">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="548.5"/>
+											<Node score="0.0037735079068186247">
+												<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="1.5"/>
+											</Node>
+										</Node>
+										<Node score="0.006135135135135139">
+											<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="0.5"/>
+										</Node>
+									</Node>
+									<Node score="0.006720000000000003">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="228.0"/>
+										<Node score="0.0050575221238937824">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="24681.0"/>
+										</Node>
+									</Node>
+									<Node score="0.00419681908548705">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="11486.0"/>
+									</Node>
+								</Node>
+								<Node score="0.005750000000000004">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="4.5"/>
+									<Node score="0.0066551724137931065">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="548.0"/>
+										<Node score="0.005254001032524475">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+										</Node>
+									</Node>
+									<Node score="0.006929577464788736">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="577.5"/>
+									</Node>
+								</Node>
+								<Node score="0.006692556634304186">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="5.5"/>
+									<Node score="0.005905801621958766">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="526.0"/>
+									</Node>
+								</Node>
+								<Node score="0.006575953458306347">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+								</Node>
+							</Node>
+							<Node score="0.0035">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="105.5"/>
+								<Node score="0.0023750000000000004">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="10009.0"/>
+									<Node score="0.002136363636363638">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8892.5"/>
+										<Node score="0.002689655172413794">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="38.0"/>
+										</Node>
+									</Node>
+									<Node score="0.0016486486486486493">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="95.5"/>
+									</Node>
+								</Node>
+								<Node score="0.00826373626373627">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13166.5"/>
+									<Node score="0.012635514018691582">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="76.0"/>
+									</Node>
+								</Node>
+								<Node score="0.0017260273972602752">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="94.0"/>
+								</Node>
+							</Node>
+							<Node score="0.0026582446808510406">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="3.5"/>
+								<Node score="0.003233283803863237">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13166.5"/>
+									<Node score="0.0022549999999999853">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="10009.0"/>
+									</Node>
+								</Node>
+								<Node score="0.0021448063380281037">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="2.5"/>
+								</Node>
+							</Node>
+							<Node score="0.006256410256410259">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="166.5"/>
+								<Node score="0.0029583333333333336">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="10061.5"/>
+								</Node>
+							</Node>
+							<Node score="0.0032554257095158087">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="29402.0"/>
+							</Node>
+						</Node>
+						<Node score="0.0215">
+							<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="1.5"/>
+							<Node score="0.01009405940594057">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="10.5"/>
+								<Node score="0.008841017488076256">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="8.5"/>
+									<Node score="0.011241758241758246">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="81.5"/>
+										<Node score="0.005677419354838712">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="59.0"/>
+											<Node score="0.010636363636363637">
+												<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="3289.0"/>
+											</Node>
+										</Node>
+										<Node score="0.03620000000000001">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="65.5"/>
+										</Node>
+									</Node>
+									<Node score="0.007958670260556999">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="561.5"/>
+										<Node score="0.007388568129330222">
+											<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+										</Node>
+									</Node>
+									<Node score="0.007017543859649127">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="24681.0"/>
+									</Node>
+								</Node>
+								<Node score="0.011595505617977533">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="7641.5"/>
+									<Node score="0.076">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="65.5"/>
+										<Node score="0.011923076923076925">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="62.5"/>
+										</Node>
+									</Node>
+									<Node score="0.009369668246445476">
+										<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+									</Node>
+								</Node>
+								<Node score="0.009014462809917313">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="538.5"/>
+									<Node score="0.00831613508442772">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="9.5"/>
+									</Node>
+								</Node>
+								<Node score="0.009223367697594458">
+									<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+								</Node>
+							</Node>
+							<Node score="0.006500000000000001">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="67.0"/>
+								<Node score="0.079">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="7232.5"/>
+									<Node score="0.072">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="56.5"/>
+										<Node score="0.086">
+											<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="11.5"/>
+										</Node>
+									</Node>
+									<Node score="0.023000000000000003">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="63.0"/>
+									</Node>
+								</Node>
+								<Node score="0.007">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="49.5"/>
+									<Node score="0.006555555555555556">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="42.5"/>
+									</Node>
+								</Node>
+								<Node score="0.012">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="11.5"/>
+								</Node>
+							</Node>
+							<Node score="0.010098310291858629">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="11.5"/>
+								<Node score="0.00840740740740739">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="273.5"/>
+									<Node score="0.013391304347826092">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="94.0"/>
+									</Node>
+								</Node>
+								<Node score="0.018666666666666665">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="274.5"/>
+								</Node>
+							</Node>
+							<Node score="0.014010526315789465">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="7641.5"/>
+								<Node score="0.011425373134328344">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="257.5"/>
+								</Node>
+							</Node>
+							<Node score="0.010806017699115085">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="682.0"/>
+							</Node>
+						</Node>
+						<Node score="0.0030000000000000005">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="63.0"/>
+							<Node score="0.07250000000000001">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5981.5"/>
+								<Node score="0.0037500000000000003">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="7.5"/>
+									<Node score="0.046">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="31.5"/>
+										<Node score="0.003">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="30.0"/>
+										</Node>
+									</Node>
+									<Node score="0.009">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="32.5"/>
+									</Node>
+								</Node>
+								<Node score="0.009">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="51.0"/>
+									<Node score="0.024">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="39.0"/>
+									</Node>
+								</Node>
+								<Node score="0.026">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="3807.5"/>
+								</Node>
+							</Node>
+							<Node score="0.025">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+								<Node score="0.008">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="8.0"/>
+								</Node>
+							</Node>
+							<Node score="0.004">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="35.5"/>
+							</Node>
+							<Node score="0.002">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="51.0"/>
+							</Node>
+						</Node>
+						<Node score="0.018500000000000003">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="7641.5"/>
+							<Node score="0.006">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="1412.0"/>
+								<Node score="0.033">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="10.5"/>
+									<Node score="0.025">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="8.5"/>
+									</Node>
+								</Node>
+							</Node>
+							<Node score="0.003028169014084509">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="3971.5"/>
+								<Node score="0.007172839506172844">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="3289.0"/>
+								</Node>
+							</Node>
+							<Node score="0.006996336996336972">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="303.0"/>
+							</Node>
+						</Node>
+						<Node score="0.004322047244094436">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="9.5"/>
+							<Node score="0.0036828422876949473">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="7.5"/>
+								<Node score="0.004675862068965521">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13166.5"/>
+								</Node>
+							</Node>
+							<Node score="0.005909090909090909">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="107.5"/>
+							</Node>
+						</Node>
+						<Node score="0.01875">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="100.0"/>
+							<Node score="0.003">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="89.0"/>
+							</Node>
+						</Node>
+						<Node score="0.004993185689948853">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="12.5"/>
+						</Node>
+					</Node>
+					<Node score="0.0165">
+						<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="1.5"/>
+						<Node score="0.021874999999999988">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="21.5"/>
+							<Node score="0.021826086956521745">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="18.5"/>
+								<Node score="0.013708561020036387">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="15.5"/>
+									<Node score="0.04133333333333333">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="66.0"/>
+										<Node score="0.0375">
+											<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+											<Node score="0.008166666666666668">
+												<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="60.5"/>
+											</Node>
+										</Node>
+										<Node score="0.079">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="56.5"/>
+										</Node>
+									</Node>
+									<Node score="0.011126865671641749">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="558.5"/>
+										<Node score="0.012378205128205071">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="318.5"/>
+										</Node>
+									</Node>
+									<Node score="0.012299632352941153">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="14.5"/>
+									</Node>
+								</Node>
+								<Node score="0.013550720620842732">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="621.5"/>
+									<Node score="0.019034482758620696">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8892.5"/>
+										<Node score="0.013846153846153833">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5981.5"/>
+										</Node>
+									</Node>
+									<Node score="0.01200888888888886">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="269.5"/>
+									</Node>
+								</Node>
+								<Node score="0.015281879194630846">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="17.5"/>
+									<Node score="0.02014285714285714">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="623.0"/>
+									</Node>
+								</Node>
+								<Node score="0.016365853658536593">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="635.5"/>
+								</Node>
+							</Node>
+							<Node score="0.015600199401794619">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="616.5"/>
+								<Node score="0.047625">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+									<Node score="0.013108108108108115">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5981.5"/>
+										<Node score="0.021714285714285724">
+											<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="19.5"/>
+										</Node>
+									</Node>
+									<Node score="0.0170625">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="298.5"/>
+									</Node>
+								</Node>
+								<Node score="0.01448752228163987">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="19.5"/>
+									<Node score="0.02525">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="129.5"/>
+									</Node>
+								</Node>
+								<Node score="0.01891228070175439">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="260.5"/>
+								</Node>
+							</Node>
+							<Node score="0.015205128205128213">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="33270.5"/>
+								<Node score="0.012590909090909095">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="631.5"/>
+									<Node score="0.01600000000000001">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="626.0"/>
+									</Node>
+								</Node>
+								<Node score="0.02123529411764706">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="639.5"/>
+								</Node>
+							</Node>
+							<Node score="0.018732142857142864">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="626.5"/>
+								<Node score="0.0232962962962963">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="620.5"/>
+								</Node>
+							</Node>
+							<Node score="0.03442857142857143">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="632.5"/>
+							</Node>
+						</Node>
+						<Node score="0.04">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="26.5"/>
+							<Node score="0.029363636363636366">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+								<Node score="0.017532946918853144">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="646.0"/>
+									<Node score="0.026588235294117652">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+										<Node score="0.017196969696969704">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5981.5"/>
+										</Node>
+									</Node>
+									<Node score="0.015999999999999945">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="293.5"/>
+									</Node>
+								</Node>
+								<Node score="0.02292307692307692">
+									<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+									<Node score="0.01663636363636364">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="670.5"/>
+									</Node>
+								</Node>
+								<Node score="0.056">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="654.5"/>
+								</Node>
+							</Node>
+							<Node score="0.01845962732919251">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="679.5"/>
+								<Node score="0.07150000000000001">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="383.0"/>
+									<Node score="0.023">
+										<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+									</Node>
+								</Node>
+								<Node score="0.02072457627118642">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+								</Node>
+							</Node>
+							<Node score="0.092">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="24.0"/>
+							</Node>
+							<Node score="0.047">
+								<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+							</Node>
+						</Node>
+						<Node score="0.02166935142009341">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="647.5"/>
+							<Node score="0.053714285714285714">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+								<Node score="0.01873684210526316">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5981.5"/>
+									<Node score="0.030333333333333337">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="190.5"/>
+									</Node>
+								</Node>
+								<Node score="0.034833333333333334">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="27.5"/>
+								</Node>
+							</Node>
+							<Node score="0.02766666666666667">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="278.5"/>
+								<Node score="0.015113924050632914">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="18151.5"/>
+								</Node>
+							</Node>
+							<Node score="0.02028918590522472">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="27.5"/>
+							</Node>
+						</Node>
+						<Node score="0.024375">
+							<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+							<Node score="0.03338461538461539">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+								<Node score="0.02377777777777778">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="657.5"/>
+								</Node>
+							</Node>
+							<Node score="0.01">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="27.5"/>
+							</Node>
+						</Node>
+						<Node score="0.09999999999999999">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="29.5"/>
+							<Node score="0.045333333333333344">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="666.5"/>
+							</Node>
+						</Node>
+						<Node score="0.0212">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="670.0"/>
+						</Node>
+					</Node>
+					<Node score="0.007333333333333334">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="21.5"/>
+						<Node score="0.00475">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="181.5"/>
+							<Node score="0.013">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13166.5"/>
+								<Node score="0.010904761904761908">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="19.5"/>
+									<Node score="0.014">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="2414.0"/>
+										<Node score="0.020666666666666667">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="152.5"/>
+										</Node>
+									</Node>
+									<Node score="0.0045000000000000005">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="3971.5"/>
+									</Node>
+								</Node>
+								<Node score="0.022">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="10182.5"/>
+									<Node score="0.0185">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="20.5"/>
+									</Node>
+								</Node>
+								<Node score="0.019333333333333334">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="20.5"/>
+								</Node>
+							</Node>
+							<Node score="0.005">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="15.5"/>
+								<Node score="0.003">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="18217.0"/>
+									<Node score="0.005">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="146.5"/>
+									</Node>
+								</Node>
+								<Node score="0.0016666666666666668">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="161.5"/>
+								</Node>
+							</Node>
+							<Node score="0.0045">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="18217.0"/>
+								<Node score="0.0030000000000000005">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="114.5"/>
+								</Node>
+							</Node>
+							<Node score="0.011">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="117.0"/>
+							</Node>
+						</Node>
+						<Node score="0.006617383512544739">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="630.5"/>
+							<Node score="0.006034564021995231">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="18.5"/>
+								<Node score="0.005157407407407383">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="14.5"/>
+									<Node score="0.006572519083969469">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="313.5"/>
+									</Node>
+								</Node>
+								<Node score="0.006715109573241013">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="448.5"/>
+								</Node>
+							</Node>
+							<Node score="0.019363636363636364">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="288.5"/>
+								<Node score="0.0077948717948717995">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="286.0"/>
+								</Node>
+							</Node>
+							<Node score="0.008731707317073175">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13166.5"/>
+							</Node>
+						</Node>
+						<Node score="0.00935">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="642.5"/>
+							<Node score="0.04900000000000001">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="14.5"/>
+								<Node score="0.004">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="637.0"/>
+								</Node>
+							</Node>
+							<Node score="0.020000000000000004">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="632.5"/>
+							</Node>
+						</Node>
+						<Node score="0.005037037037037039">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="682.0"/>
+							<Node score="0.006947368421052635">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="659.5"/>
+							</Node>
+						</Node>
+						<Node score="0.022">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="14.5"/>
+						</Node>
+					</Node>
+					<Node score="0.003">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+						<Node score="0.01151612903225807">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="379.5"/>
+							<Node score="0.041">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="22.5"/>
+							</Node>
+							<Node score="0.026000000000000002">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="2578.0"/>
+								<Node score="0.016">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="25.5"/>
+								</Node>
+							</Node>
+							<Node score="0.017285714285714286">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="24.5"/>
+							</Node>
+						</Node>
+						<Node score="0.007">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="28.0"/>
+							<Node score="0.007">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="22.5"/>
+								<Node score="0.006">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="401.5"/>
+								</Node>
+							</Node>
+						</Node>
+					</Node>
+					<Node score="0.003">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="26.5"/>
+						<Node score="0.006025641025641028">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="669.5"/>
+							<Node score="0.04">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="642.5"/>
+								<Node score="0.0077146583202921054">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="640.5"/>
+								</Node>
+							</Node>
+							<Node score="0.00472727272727273">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="645.5"/>
+							</Node>
+						</Node>
+						<Node score="0.01575">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="682.0"/>
+							<Node score="0.01">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="23.5"/>
+							</Node>
+						</Node>
+						<Node score="0.011">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="24.0"/>
+						</Node>
+					</Node>
+					<Node score="0.006728260869565215">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="625.5"/>
+						<Node score="0.0158">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="605.5"/>
+							<Node score="0.008602459016393388">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="604.5"/>
+							</Node>
+						</Node>
+						<Node score="0.011500000000000002">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="24681.0"/>
+						</Node>
+					</Node>
+					<Node score="0.004857142857142858">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="629.0"/>
+						<Node score="0.039400000000000004">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="27.5"/>
+						</Node>
+					</Node>
+					<Node score="0.006875000000000003">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="28.5"/>
+					</Node>
+				</Node>
+				<Node score="0.004321111111111063">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="12.5"/>
+					<Node score="0.00270329670329669">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="5.5"/>
+						<Node score="0.07509677419354839">
+							<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="4.5"/>
+							<Node score="0.030428571428571423">
+								<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="3.5"/>
+								<Node score="0.0161385784532857">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="555.0"/>
+									<Node score="0.012129482071713025">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="2.5"/>
+										<Node score="0.013910318225650824">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="7641.5"/>
+											<Node score="0.01217954815695595">
+												<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="1622.0"/>
+											</Node>
+										</Node>
+										<Node score="0.010323750855578493">
+											<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="1.5"/>
+										</Node>
+									</Node>
+									<Node score="0.021690566037735816">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="89.5"/>
+										<Node score="0.014799019607843116">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="58.5"/>
+										</Node>
+									</Node>
+									<Node score="0.013909877433309266">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="3.5"/>
+									</Node>
+								</Node>
+								<Node score="0.016678571428571435">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+									<Node score="0.011214285714285717">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="0.5"/>
+										<Node score="0.02064285714285714">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="600.5"/>
+										</Node>
+									</Node>
+									<Node score="0.022926910299003286">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="646.0"/>
+									</Node>
+								</Node>
+								<Node score="0.012384615384615383">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="622.5"/>
+									<Node score="0.02398734177215187">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="619.5"/>
+									</Node>
+								</Node>
+								<Node score="0.05366666666666667">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="626.5"/>
+								</Node>
+							</Node>
+							<Node score="0.03751840490797546">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="555.0"/>
+								<Node score="0.04154545454545455">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="2.5"/>
+									<Node score="0.019575487599326088">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="414.5"/>
+										<Node score="0.022781378600823077">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="7641.5"/>
+										</Node>
+									</Node>
+									<Node score="0.027815789473684186">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+									</Node>
+								</Node>
+								<Node score="0.03319642857142857">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="4.5"/>
+									<Node score="0.026501155624037147">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="414.5"/>
+									</Node>
+								</Node>
+								<Node score="0.03127696404793603">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="18167.0"/>
+								</Node>
+							</Node>
+							<Node score="0.03598412698412697">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="585.0"/>
+								<Node score="0.05709756097560974">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="561.5"/>
+									<Node score="0.14250000000000002">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="24681.0"/>
+									</Node>
+								</Node>
+								<Node score="0.047766871165644154">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+								</Node>
+							</Node>
+							<Node score="0.10324999999999997">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="596.5"/>
+								<Node score="0.0719615384615385">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="592.5"/>
+								</Node>
+							</Node>
+							<Node score="0.05166153846153843">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="653.0"/>
+							</Node>
+						</Node>
+						<Node score="0.004452127659574472">
+							<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="5.5"/>
+							<Node score="0.005012500000000004">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="7641.5"/>
+								<Node score="0.0051357575757575375">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="96.5"/>
+									<Node score="0.004004921259842496">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="61.5"/>
+										<Node score="0.005272727272727275">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="325.5"/>
+										</Node>
+									</Node>
+									<Node score="0.010333333333333337">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="65.5"/>
+									</Node>
+								</Node>
+								<Node score="0.0033154362416107407">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="2.5"/>
+									<Node score="0.002770731707317075">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5981.5"/>
+									</Node>
+								</Node>
+								<Node score="0.0034924623115577913">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5981.5"/>
+								</Node>
+							</Node>
+							<Node score="0.0032953367875647693">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="2.5"/>
+								<Node score="0.002978755690440044">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="228.0"/>
+									<Node score="0.0033377926421404524">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="152.5"/>
+									</Node>
+								</Node>
+								<Node score="0.002537239324726821">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="555.0"/>
+								</Node>
+							</Node>
+							<Node score="0.0035568120624662916">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="555.0"/>
+								<Node score="0.00315433571996814">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="3.5"/>
+								</Node>
+							</Node>
+							<Node score="0.003848623853211012">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="601.5"/>
+							</Node>
+						</Node>
+						<Node score="0.16133333333333333">
+							<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="6.5"/>
+							<Node score="0.058714285714285726">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="3.5"/>
+								<Node score="0.021516044531761532">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="590.0"/>
+									<Node score="0.017508612873980426">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="2.5"/>
+									</Node>
+								</Node>
+								<Node score="0.033725">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+								</Node>
+							</Node>
+							<Node score="0.030605911330049217">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="576.5"/>
+								<Node score="0.02560130391173534">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="422.0"/>
+								</Node>
+							</Node>
+							<Node score="0.05046601941747572">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="666.5"/>
+							</Node>
+						</Node>
+						<Node score="0.008153846153846117">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="7641.5"/>
+							<Node score="0.030300000000000004">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="71.5"/>
+								<Node score="0.009764918625678094">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="70.5"/>
+								</Node>
+							</Node>
+							<Node score="0.0018150000000000013">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="3971.5"/>
+							</Node>
+						</Node>
+						<Node score="0.004181506849315002">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="17896.5"/>
+							<Node score="0.001538910505836577">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="10009.0"/>
+							</Node>
+						</Node>
+						<Node score="0.001605571847507286">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="29402.0"/>
+						</Node>
+					</Node>
+					<Node score="0.10971428571428571">
+						<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="4.5"/>
+						<Node score="0.03254687499999999">
+							<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="3.5"/>
+							<Node score="0.02878138718173829">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="556.0"/>
+								<Node score="0.023662775616082952">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="8.5"/>
+									<Node score="0.18000000000000002">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="65.5"/>
+										<Node score="0.020774193548387106">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="64.0"/>
+										</Node>
+									</Node>
+									<Node score="0.02086806771745475">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="7.5"/>
+									</Node>
+								</Node>
+								<Node score="0.021400000000000006">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="66.5"/>
+									<Node score="0.11750000000000001">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="4498.5"/>
+									</Node>
+								</Node>
+								<Node score="0.025417673716012">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="10.5"/>
+								</Node>
+							</Node>
+							<Node score="0.03845641025641022">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="611.5"/>
+								<Node score="0.030733944954128428">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="9.5"/>
+									<Node score="0.026566079295154164">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+									</Node>
+								</Node>
+								<Node score="0.031931603773584886">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+								</Node>
+							</Node>
+							<Node score="0.039914634146341416">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+								<Node score="0.03249999999999998">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="9.5"/>
+								</Node>
+							</Node>
+							<Node score="0.05332">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="629.0"/>
+							</Node>
+						</Node>
+						<Node score="0.05532311977715901">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="556.0"/>
+							<Node score="0.04124999999999998">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="7.5"/>
+								<Node score="0.026385135135135115">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="18167.0"/>
+									<Node score="0.03934185606060603">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="17896.5"/>
+									</Node>
+								</Node>
+								<Node score="0.05199193548387092">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="24681.0"/>
+								</Node>
+							</Node>
+							<Node score="0.29500000000000004">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="65.5"/>
+								<Node score="0.06415384615384617">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="63.0"/>
+								</Node>
+							</Node>
+							<Node score="0.04846927374301673">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="9.5"/>
+							</Node>
+						</Node>
+						<Node score="0.08050453172205443">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="619.5"/>
+							<Node score="0.06525039123630672">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="10.5"/>
+								<Node score="0.055776162790697636">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="7.5"/>
+								</Node>
+							</Node>
+							<Node score="0.0701438356164384">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="576.5"/>
+							</Node>
+						</Node>
+						<Node score="0.04243750000000002">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="33270.5"/>
+							<Node score="0.07739024390243904">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="676.0"/>
+							</Node>
+						</Node>
+						<Node score="0.09103389830508475">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="10.5"/>
+						</Node>
+					</Node>
+					<Node score="0.007975308641975314">
+						<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="5.5"/>
+						<Node score="0.006">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="72.5"/>
+							<Node score="0.015499999999999998">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5981.5"/>
+								<Node score="0.007377777777777782">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="3971.5"/>
+									<Node score="0.016142857142857143">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="1469.5"/>
+									</Node>
+								</Node>
+								<Node score="0.033909090909090916">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="65.5"/>
+								</Node>
+							</Node>
+							<Node score="0.00425">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="62.0"/>
+								<Node score="0.003272727272727273">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="8.5"/>
+								</Node>
+							</Node>
+							<Node score="0.004666666666666667">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="6.5"/>
+							</Node>
+						</Node>
+						<Node score="0.0050160664819944075">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="9.5"/>
+							<Node score="0.004295964125560477">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="7.5"/>
+								<Node score="0.006425000000000002">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="80.5"/>
+								</Node>
+							</Node>
+							<Node score="0.007409090909090913">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="89.0"/>
+							</Node>
+						</Node>
+						<Node score="0.005520590043023908">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="11.5"/>
+							<Node score="0.007770833333333337">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="108.0"/>
+							</Node>
+						</Node>
+						<Node score="0.0062275600505688625">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="609.5"/>
+						</Node>
+					</Node>
+					<Node score="0.06180281690140841">
+						<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="6.5"/>
+						<Node score="0.05236599099099091">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="557.5"/>
+							<Node score="0.03966682998530145">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="10.5"/>
+								<Node score="0.03388785046728975">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="7.5"/>
+								</Node>
+							</Node>
+							<Node score="0.04310309278350514">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="270.5"/>
+							</Node>
+						</Node>
+						<Node score="0.06055729166666668">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="602.5"/>
+							<Node score="0.04820879120879117">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="9.5"/>
+							</Node>
+						</Node>
+						<Node score="0.1048214285714286">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="6.5"/>
+						</Node>
+					</Node>
+					<Node score="0.021">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="2414.0"/>
+						<Node score="0.018666666666666668">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="7.5"/>
+							<Node score="0.0134">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="44.5"/>
+							</Node>
+						</Node>
+						<Node score="0.0379">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="204.0"/>
+						</Node>
+					</Node>
+					<Node score="0.012168316831683157">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13166.5"/>
+						<Node score="0.005907637655417346">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="11486.0"/>
+						</Node>
+					</Node>
+					<Node score="0.003012334801762061">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="29402.0"/>
+					</Node>
+				</Node>
+				<Node score="0.22972727272727275">
+					<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="6.5"/>
+					<Node score="0.011261437908496675">
+						<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="5.5"/>
+						<Node score="0.157531914893617">
+							<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="4.5"/>
+							<Node score="0.06563740458015267">
+								<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="3.5"/>
+								<Node score="0.07106666666666663">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="19.5"/>
+									<Node score="0.03878051839464913">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+										<Node score="0.033562091503267964">
+											<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="15.5"/>
+										</Node>
+									</Node>
+									<Node score="0.04326463414634141">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="648.5"/>
+									</Node>
+								</Node>
+								<Node score="0.06982692307692309">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="26.5"/>
+									<Node score="0.047383226881422186">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="643.5"/>
+									</Node>
+								</Node>
+								<Node score="0.05568923734853894">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="613.5"/>
+								</Node>
+							</Node>
+							<Node score="0.12212021857923498">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="19.5"/>
+								<Node score="0.08183017635532326">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+									<Node score="0.0711771137026239">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="546.5"/>
+									</Node>
+								</Node>
+								<Node score="0.09516335877862597">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="614.5"/>
+								</Node>
+							</Node>
+							<Node score="0.10971496437054638">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="611.5"/>
+								<Node score="0.09370767004341554">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="23.5"/>
+								</Node>
+							</Node>
+							<Node score="0.12201466275659828">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="643.5"/>
+							</Node>
+						</Node>
+						<Node score="0.00843574417214581">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="23.5"/>
+							<Node score="0.0615">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="73.0"/>
+								<Node score="0.003">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="63.0"/>
+									<Node score="0.0095">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13750.0"/>
+									</Node>
+								</Node>
+								<Node score="0.067">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="68.0"/>
+								</Node>
+							</Node>
+							<Node score="0.0064914630063609155">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="16.5"/>
+								<Node score="0.008237209302325563">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+								</Node>
+							</Node>
+							<Node score="0.0074483250178190045">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="20.5"/>
+							</Node>
+						</Node>
+						<Node score="0.04740000000000001">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+							<Node score="0.009666666666666667">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5981.5"/>
+								<Node score="0.006750000000000002">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="3980.0"/>
+								</Node>
+							</Node>
+							<Node score="0.01842857142857143">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="298.5"/>
+							</Node>
+						</Node>
+						<Node score="0.009481067659838582">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="578.5"/>
+							<Node score="0.007281250000000006">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="10009.0"/>
+							</Node>
+						</Node>
+						<Node score="0.010076642335766377">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="27.5"/>
+						</Node>
+					</Node>
+					<Node score="0.1482727272727273">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="19.5"/>
+						<Node score="0.0695995792426369">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="16.5"/>
+							<Node score="0.023000000000000003">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="56.5"/>
+								<Node score="0.29">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13750.0"/>
+									<Node score="0.3986666666666667">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="15.5"/>
+									</Node>
+								</Node>
+								<Node score="0.0325">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="13.5"/>
+								</Node>
+							</Node>
+							<Node score="0.06057619047619042">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="495.5"/>
+								<Node score="0.05223622047244096">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="298.5"/>
+								</Node>
+							</Node>
+							<Node score="0.1175">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="497.5"/>
+							</Node>
+						</Node>
+						<Node score="0.06482926829268293">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="467.0"/>
+							<Node score="0.06057534246575343">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="257.0"/>
+								<Node score="0.04904444444444445">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="156.5"/>
+								</Node>
+							</Node>
+							<Node score="0.07438840070298773">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="322.5"/>
+							</Node>
+						</Node>
+						<Node score="0.0882425531914893">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="629.0"/>
+							<Node score="0.08082084309133478">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+							</Node>
+						</Node>
+						<Node score="0.10133750000000001">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="675.5"/>
+						</Node>
+					</Node>
+					<Node score="0.11445519713261637">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="593.0"/>
+						<Node score="0.10820900321543403">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="26.5"/>
+							<Node score="0.09125076142131977">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+								<Node score="0.08214799281006593">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="23.5"/>
+								</Node>
+							</Node>
+							<Node score="0.07325925925925926">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="429.0"/>
+							</Node>
+						</Node>
+						<Node score="0.10054509803921564">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="312.5"/>
+							<Node score="0.07415000000000001">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="237.5"/>
+							</Node>
+						</Node>
+						<Node score="0.18714285714285714">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="314.5"/>
+						</Node>
+					</Node>
+					<Node score="0.1299868667917448">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="657.5"/>
+						<Node score="0.15266666666666667">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="23.5"/>
+							<Node score="0.1044343257443083">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="654.0"/>
+							</Node>
+						</Node>
+						<Node score="0.11498327137546469">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+						</Node>
+					</Node>
+					<Node score="0.15735000000000005">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="27.5"/>
+						<Node score="0.11869230769230771">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="21.5"/>
+						</Node>
+					</Node>
+					<Node score="0.17146666666666663">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="670.0"/>
+					</Node>
+				</Node>
+				<Node score="0.031">
+					<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="2414.0"/>
+					<Node score="0.021">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="18.5"/>
+						<Node score="0.039">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="221.5"/>
+							<Node score="0.019">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="184.5"/>
+								<Node score="0.024">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="16.0"/>
+								</Node>
+							</Node>
+							<Node score="0.02766666666666667">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="16.5"/>
+								<Node score="0.022">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="204.0"/>
+								</Node>
+							</Node>
+						</Node>
+					</Node>
+					<Node score="0.039">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="204.0"/>
+						<Node score="0.038">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="173.5"/>
+						</Node>
+					</Node>
+					<Node score="0.022">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="235.0"/>
+					</Node>
+					<Node score="0.032">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="21.0"/>
+					</Node>
+				</Node>
+				<Node score="0.00375">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="220.5"/>
+					<Node score="0.036">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13166.5"/>
+						<Node score="0.0035">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="4498.5"/>
+							<Node score="0.006333333333333333">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="17.5"/>
+								<Node score="0.0026000000000000003">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="211.0"/>
+								</Node>
+							</Node>
+							<Node score="0.018">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="18.5"/>
+							</Node>
+						</Node>
+						<Node score="0.0375">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="16.5"/>
+							<Node score="0.013555555555555559">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="218.5"/>
+							</Node>
+						</Node>
+						<Node score="0.02433333333333334">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="21.5"/>
+						</Node>
+					</Node>
+					<Node score="0.005666666666666667">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="18217.0"/>
+						<Node score="0.0032500000000000003">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="196.5"/>
+							<Node score="0.0023684210526315795">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="18.0"/>
+							</Node>
+						</Node>
+						<Node score="0.0026000000000000003">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="14.5"/>
+						</Node>
+					</Node>
+					<Node score="0.0025">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="84.5"/>
+						<Node score="0.0035">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="13.5"/>
+						</Node>
+					</Node>
+					<Node score="0.007666666666666666">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="99.5"/>
+					</Node>
+				</Node>
+				<Node score="0.00523646873357855">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="22.5"/>
+					<Node score="0.001">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="282.5"/>
+						<Node score="0.00601910828025478">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="29402.0"/>
+							<Node score="0.010888888888888892">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5981.5"/>
+							</Node>
+						</Node>
+						<Node score="0.0435">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="19.0"/>
+						</Node>
+					</Node>
+					<Node score="0.004772727272727276">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="13.5"/>
+						<Node score="0.0035975609756097584">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="29402.0"/>
+						</Node>
+					</Node>
+					<Node score="0.006716763005780345">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13166.5"/>
+					</Node>
+				</Node>
+				<Node score="0.007012345679012298">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="664.0"/>
+					<Node score="0.0052747524752474965">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="29402.0"/>
+						<Node score="0.006910377358490554">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="15652.5"/>
+						</Node>
+					</Node>
+					<Node score="0.0284">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="375.5"/>
+					</Node>
+				</Node>
+				<Node score="0.005714285714285715">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="28.5"/>
+					<Node score="0.0115">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="24.5"/>
+					</Node>
+				</Node>
+				<Node score="0.0505">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="675.5"/>
+				</Node>
+			</Node>
+			<Node score="0.077">
+				<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="2.5"/>
+				<Node score="0.052857142857142866">
+					<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="1.5"/>
+					<Node score="0.04730000000000001">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="70.5"/>
+						<Node score="0.04098412698412697">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="54.5"/>
+							<Node score="0.029577599999999954">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="39.5"/>
+								<Node score="0.024011142061281344">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="607.0"/>
+									<Node score="0.017206896551724145">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="32.5"/>
+										<Node score="0.06119999999999999">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+											<Node score="0.017714285714285714">
+												<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="5454.5"/>
+											</Node>
+										</Node>
+										<Node score="0.022498198198198163">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="605.5"/>
+										</Node>
+									</Node>
+									<Node score="0.04847058823529412">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="282.5"/>
+										<Node score="0.02906837606837606">
+											<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="281.5"/>
+										</Node>
+									</Node>
+									<Node score="0.025480466072652502">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="33270.5"/>
+									</Node>
+								</Node>
+								<Node score="0.02257017543859646">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="31.5"/>
+									<Node score="0.023333333333333334">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="609.5"/>
+										<Node score="0.013411764705882356">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="33270.5"/>
+										</Node>
+									</Node>
+									<Node score="0.02622448979591837">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="616.5"/>
+									</Node>
+								</Node>
+								<Node score="0.010222222222222223">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="17959.5"/>
+									<Node score="0.023300000000000005">
+										<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+									</Node>
+								</Node>
+								<Node score="0.02739648682559597">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="622.5"/>
+								</Node>
+							</Node>
+							<Node score="0.13566666666666669">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+								<Node score="0.037">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="263.0"/>
+									<Node score="0.015">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="42.5"/>
+										<Node score="0.011">
+											<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="41.5"/>
+										</Node>
+									</Node>
+									<Node score="0.047">
+										<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+									</Node>
+								</Node>
+								<Node score="0.04875">
+									<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+									<Node score="0.1185">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="47.0"/>
+									</Node>
+								</Node>
+								<Node score="0.1115">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="49.5"/>
+								</Node>
+							</Node>
+							<Node score="0.03327950310559003">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="46.5"/>
+								<Node score="0.029064410925397625">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="644.5"/>
+									<Node score="0.03194814814814809">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="24681.0"/>
+									</Node>
+								</Node>
+								<Node score="0.04556521739130434">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="656.5"/>
+								</Node>
+							</Node>
+							<Node score="0.03465293185419972">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+								<Node score="0.02968965517241376">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="18151.5"/>
+								</Node>
+							</Node>
+							<Node score="0.031238570241064">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="651.0"/>
+							</Node>
+						</Node>
+						<Node score="0.093">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="10182.5"/>
+							<Node score="0.023">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="186.0"/>
+								<Node score="0.042">
+									<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+									<Node score="0.055">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="58.5"/>
+									</Node>
+									<Node score="0.044">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="60.5"/>
+									</Node>
+								</Node>
+								<Node score="0.012">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="56.5"/>
+								</Node>
+							</Node>
+							<Node score="0.134">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="65.0"/>
+								<Node score="0.0782">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="302.5"/>
+									<Node score="0.038">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="58.0"/>
+									</Node>
+								</Node>
+								<Node score="0.0895">
+									<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+								</Node>
+							</Node>
+							<Node score="0.182">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="68.0"/>
+								<Node score="0.15">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="302.5"/>
+								</Node>
+							</Node>
+							<Node score="0.119">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="302.5"/>
+							</Node>
+						</Node>
+						<Node score="0.026500000000000003">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="57.5"/>
+							<Node score="0.020200000000000003">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13166.5"/>
+								<Node score="0.0105">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="545.5"/>
+									<Node score="0.0675">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="55.5"/>
+									</Node>
+								</Node>
+								<Node score="0.017680000000000008">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="595.0"/>
+								</Node>
+							</Node>
+							<Node score="0.05133333333333332">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="675.5"/>
+								<Node score="0.0376681547619047">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="650.0"/>
+								</Node>
+							</Node>
+							<Node score="0.021777777777777778">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="56.5"/>
+							</Node>
+						</Node>
+						<Node score="0.04905190311418682">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+							<Node score="0.04059278803869831">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="634.5"/>
+								<Node score="0.045176972281449845">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="568.5"/>
+								</Node>
+							</Node>
+							<Node score="0.05824193548387096">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="59.5"/>
+							</Node>
+						</Node>
+						<Node score="0.04588442211055278">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="599.0"/>
+							<Node score="0.036455882352941144">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="62.5"/>
+							</Node>
+						</Node>
+						<Node score="0.03341978609625667">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="69.5"/>
+						</Node>
+					</Node>
+					<Node score="0.04693827160493824">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="113.5"/>
+						<Node score="0.041235294117647044">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="82.5"/>
+							<Node score="0.11249999999999999">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="305.5"/>
+								<Node score="0.142">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="71.5"/>
+								</Node>
+								<Node score="0.07216666666666666">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="77.5"/>
+									<Node score="0.1">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="72.5"/>
+									</Node>
+								</Node>
+								<Node score="0.09009999999999999">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="302.5"/>
+								</Node>
+							</Node>
+							<Node score="0.09500000000000001">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+								<Node score="0.03514545454545454">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="669.5"/>
+									<Node score="0.04894158415841585">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="657.5"/>
+									</Node>
+								</Node>
+								<Node score="0.05903999999999998">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="79.5"/>
+								</Node>
+							</Node>
+							<Node score="0.07014285714285715">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="612.5"/>
+								<Node score="0.04327027027027026">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="601.0"/>
+								</Node>
+							</Node>
+							<Node score="0.03297183098591547">
+								<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+							</Node>
+						</Node>
+						<Node score="0.0639449541284404">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="581.5"/>
+							<Node score="0.05340000000000001">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="483.0"/>
+								<Node score="0.054090909090909085">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="338.0"/>
+									<Node score="0.09325">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="84.5"/>
+									</Node>
+								</Node>
+								<Node score="0.03655">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="469.5"/>
+								</Node>
+							</Node>
+							<Node score="0.05">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="509.5"/>
+								<Node score="0.07739495798319325">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="110.5"/>
+								</Node>
+							</Node>
+							<Node score="0.038130434782608705">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="513.5"/>
+							</Node>
+						</Node>
+						<Node score="0.04394444444444446">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="604.5"/>
+							<Node score="0.035230769230769225">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="96.5"/>
+								<Node score="0.04927586206896551">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="86.5"/>
+								</Node>
+							</Node>
+							<Node score="0.07725">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="99.5"/>
+							</Node>
+						</Node>
+						<Node score="0.05916455696202531">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="607.5"/>
+							<Node score="0.08146341463414634">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="95.5"/>
+							</Node>
+						</Node>
+						<Node score="0.05587025316455697">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="656.5"/>
+						</Node>
+					</Node>
+					<Node score="0.041666666666666664">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="171.5"/>
+						<Node score="0.064">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="33270.5"/>
+							<Node score="0.17133333333333334">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="489.5"/>
+								<Node score="0.08393333333333333">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="469.5"/>
+									<Node score="0.019700000000000002">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="122.5"/>
+									</Node>
+								</Node>
+								<Node score="0.09633333333333333">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="129.0"/>
+								</Node>
+							</Node>
+							<Node score="0.0825">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="161.5"/>
+								<Node score="0.06242148760330575">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="150.5"/>
+								</Node>
+							</Node>
+							<Node score="0.022000000000000002">
+								<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+							</Node>
+						</Node>
+						<Node score="0.009666666666666665">
+							<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+							<Node score="0.07999226804123703">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+								<Node score="0.06213333333333334">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="396.5"/>
+								</Node>
+							</Node>
+							<Node score="0.042">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="114.5"/>
+							</Node>
+						</Node>
+						<Node score="0.07748000000000003">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="166.5"/>
+							<Node score="0.06475581395348833">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="615.5"/>
+							</Node>
+						</Node>
+						<Node score="0.010333333333333333">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="168.5"/>
+						</Node>
+					</Node>
+					<Node score="0.08525000000000002">
+						<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="0.5"/>
+						<Node score="0.15625">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="420.0"/>
+							<Node score="0.09603333333333335">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="396.5"/>
+								<Node score="0.1375">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="197.5"/>
+								</Node>
+							</Node>
+							<Node score="0.121">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="198.5"/>
+							</Node>
+						</Node>
+						<Node score="0.04694444444444445">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="639.0"/>
+							<Node score="0.175">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="175.5"/>
+							</Node>
+						</Node>
+						<Node score="0.10273076923076926">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="659.5"/>
+						</Node>
+					</Node>
+					<Node score="0.147">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="172.5"/>
+					</Node>
+					<Node score="0.06196774193548387">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="198.5"/>
+						<Node score="0.0775">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="187.5"/>
+						</Node>
+					</Node>
+					<Node score="0.09742857142857143">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="420.0"/>
+					</Node>
+				</Node>
+				<Node score="0.012288888888888894">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="56.5"/>
+					<Node score="0.011514285714285715">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="39.5"/>
+						<Node score="0.036">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="234.0"/>
+							<Node score="0.008">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="33.5"/>
+								<Node score="0.019">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="4579.5"/>
+								</Node>
+							</Node>
+							<Node score="0.037">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="36.5"/>
+								<Node score="0.0485">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="35.5"/>
+								</Node>
+							</Node>
+							<Node score="0.009">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="38.5"/>
+								<Node score="0.02">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="37.5"/>
+								</Node>
+							</Node>
+						</Node>
+						<Node score="0.00876910299003317">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="630.5"/>
+							<Node score="0.013111940298507442">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="33270.5"/>
+								<Node score="0.007115789473684214">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="586.5"/>
+									<Node score="0.010263959390862892">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="572.5"/>
+									</Node>
+								</Node>
+								<Node score="0.010215686274509795">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="34.5"/>
+								</Node>
+							</Node>
+							<Node score="0.0066315789473684154">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="562.5"/>
+								<Node score="0.0115483870967742">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="462.0"/>
+								</Node>
+							</Node>
+							<Node score="0.01166972477064217">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="587.5"/>
+							</Node>
+						</Node>
+						<Node score="0.01675">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="632.5"/>
+							<Node score="0.004">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="31.5"/>
+								<Node score="0.002">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="23534.5"/>
+								</Node>
+							</Node>
+							<Node score="0.0254">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="34.5"/>
+							</Node>
+						</Node>
+						<Node score="0.010696202531645577">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="34.5"/>
+							<Node score="0.006913043478260871">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="637.0"/>
+							</Node>
+						</Node>
+						<Node score="0.015031250000000005">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="35.5"/>
+						</Node>
+					</Node>
+					<Node score="0.048">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="45.5"/>
+						<Node score="0.009571428571428573">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="612.5"/>
+							<Node score="0.012655813953488342">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="611.0"/>
+								<Node score="0.019163265306122456">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="462.0"/>
+									<Node score="0.010583333333333339">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="313.5"/>
+									</Node>
+								</Node>
+								<Node score="0.0110845410628019">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="590.5"/>
+								</Node>
+							</Node>
+							<Node score="0.019125">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="42.5"/>
+								<Node score="0.09">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="33306.0"/>
+								</Node>
+							</Node>
+							<Node score="0.0124">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+							</Node>
+						</Node>
+						<Node score="0.005090909090909091">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="682.0"/>
+							<Node score="0.0074545454545454585">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+								<Node score="0.00960752688172041">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="659.5"/>
+								</Node>
+							</Node>
+							<Node score="0.013157894736842111">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="44.5"/>
+							</Node>
+						</Node>
+						<Node score="0.005333333333333333">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="44.0"/>
+							<Node score="0.011">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="40.5"/>
+							</Node>
+						</Node>
+					</Node>
+					<Node score="0.002">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="274.0"/>
+						<Node score="0.001">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="47.5"/>
+							<Node score="0.0015">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="46.5"/>
+								<Node score="0.004">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="254.0"/>
+								</Node>
+							</Node>
+						</Node>
+						<Node score="0.006000000000000001">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="15923.0"/>
+							<Node score="0.006">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="49.5"/>
+							</Node>
+						</Node>
+					</Node>
+					<Node score="0.012771653543307048">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="647.5"/>
+						<Node score="0.014620320855614957">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="566.5"/>
+							<Node score="0.011538461538461534">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="526.0"/>
+							</Node>
+						</Node>
+						<Node score="0.011185995623632348">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="606.5"/>
+						</Node>
+					</Node>
+					<Node score="0.054">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="654.0"/>
+						<Node score="0.020999999999999998">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="651.0"/>
+						</Node>
+					</Node>
+					<Node score="0.01771428571428572">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="27731.0"/>
+					</Node>
+				</Node>
+				<Node score="0.00913888888888889">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="113.5"/>
+					<Node score="0.061">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="286.0"/>
+						<Node score="0.0325">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="232.5"/>
+							<Node score="0.003">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="79.0"/>
+								<Node score="0.005">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="132.0"/>
+								</Node>
+							</Node>
+							<Node score="0.049">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="81.5"/>
+							</Node>
+							<Node score="0.011999999999999999">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="85.0"/>
+							</Node>
+						</Node>
+						<Node score="0.031">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="60.5"/>
+						</Node>
+						<Node score="0.09">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="63.0"/>
+						</Node>
+						<Node score="0.021">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="67.0"/>
+						</Node>
+					</Node>
+					<Node score="0.036500000000000005">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="589.5"/>
+						<Node score="0.014037135278514551">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="70.5"/>
+							<Node score="0.012285714285714285">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="11433.5"/>
+								<Node score="0.04833333333333333">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="58.0"/>
+								</Node>
+							</Node>
+							<Node score="0.006428571428571429">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="435.5"/>
+							</Node>
+						</Node>
+						<Node score="0.025562499999999985">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="587.5"/>
+							<Node score="0.01800279329608933">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="579.5"/>
+							</Node>
+						</Node>
+						<Node score="0.08199999999999999">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="72.5"/>
+						</Node>
+					</Node>
+					<Node score="0.01213559322033899">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="99.5"/>
+						<Node score="0.015433460076045591">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="634.5"/>
+							<Node score="0.012350746268656686">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="33270.5"/>
+							</Node>
+						</Node>
+						<Node score="0.018104815864022614">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="675.5"/>
+						</Node>
+					</Node>
+					<Node score="0.016518518518518526">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="643.0"/>
+						<Node score="0.0098936170212766">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="619.0"/>
+						</Node>
+					</Node>
+					<Node score="0.004545454545454547">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="103.5"/>
+					</Node>
+				</Node>
+				<Node score="0.064">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="121.5"/>
+					<Node score="0.014">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="27731.0"/>
+						<Node score="0.0025">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="551.0"/>
+							<Node score="0.003">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="120.5"/>
+								<Node score="0.005">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="469.5"/>
+								</Node>
+							</Node>
+						</Node>
+						<Node score="0.005">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="119.5"/>
+							<Node score="0.022500000000000003">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="657.0"/>
+							</Node>
+						</Node>
+						<Node score="0.002">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="661.0"/>
+						</Node>
+					</Node>
+					<Node score="0.02497297297297298">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="117.5"/>
+						<Node score="0.057">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="396.5"/>
+						</Node>
+						<Node score="0.008142857142857144">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="530.5"/>
+						</Node>
+					</Node>
+					<Node score="0.013666666666666666">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="615.5"/>
+						<Node score="0.03436842105263158">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="556.5"/>
+						</Node>
+					</Node>
+					<Node score="0.0395">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="119.5"/>
+					</Node>
+				</Node>
+				<Node score="0.018111111111111116">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="167.5"/>
+					<Node score="0.006904761904761906">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="27731.0"/>
+						<Node score="0.01785714285714286">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="523.5"/>
+							<Node score="0.008222222222222223">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="295.5"/>
+							</Node>
+						</Node>
+						<Node score="0.0112">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="140.5"/>
+						</Node>
+					</Node>
+					<Node score="0.014989583333333332">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="639.0"/>
+						<Node score="0.021530612244897968">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+						</Node>
+					</Node>
+					<Node score="0.035764705882352955">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="131.5"/>
+					</Node>
+				</Node>
+				<Node score="0.018116279069767444">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="673.5"/>
+					<Node score="0.046">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="168.5"/>
+						<Node score="0.073">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="625.0"/>
+						</Node>
+					</Node>
+					<Node score="0.02638333333333333">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="198.5"/>
+					</Node>
+				</Node>
+			</Node>
+			<Node score="0.430888888888889">
+				<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="6.5"/>
+				<Node score="0.017200000000000007">
+					<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="5.5"/>
+					<Node score="0.37856923076923077">
+						<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="4.5"/>
+						<Node score="0.16374358974358974">
+							<SimplePredicate field="double(Request Type)" operator="lessOrEqual" value="3.5"/>
+							<Node score="0.09850073313782992">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="64.5"/>
+								<Node score="0.08109803921568626">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="44.5"/>
+									<Node score="0.06568094302554035">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="38.5"/>
+										<Node score="0.11993749999999999">
+											<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+										</Node>
+									</Node>
+									<Node score="0.07262776412776413">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="594.5"/>
+									</Node>
+								</Node>
+								<Node score="0.22807142857142856">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+									<Node score="0.066">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="45.5"/>
+									</Node>
+								</Node>
+								<Node score="0.08574253990284521">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="52.5"/>
+								</Node>
+							</Node>
+							<Node score="0.13203201506591342">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="96.5"/>
+								<Node score="0.11105908096280086">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="78.5"/>
+									<Node score="0.13123999999999994">
+										<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="532.5"/>
+									</Node>
+								</Node>
+								<Node score="0.11173076923076922">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="520.0"/>
+								</Node>
+							</Node>
+							<Node score="0.04125">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="143.5"/>
+								<Node score="0.15375811688311702">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="142.5"/>
+								</Node>
+							</Node>
+							<Node score="0.19544444444444445">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="639.0"/>
+							</Node>
+						</Node>
+						<Node score="0.19654344827586243">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="59.5"/>
+							<Node score="0.18251724137931039">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="43.5"/>
+								<Node score="0.15248323301805655">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="649.5"/>
+									<Node score="0.13576626016260152">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="38.5"/>
+									</Node>
+								</Node>
+								<Node score="0.29977777777777775">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="656.5"/>
+								</Node>
+							</Node>
+							<Node score="0.19844303797468357">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="53.5"/>
+								<Node score="0.17191899766899763">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="643.5"/>
+								</Node>
+							</Node>
+							<Node score="0.43533333333333335">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="237.0"/>
+							</Node>
+						</Node>
+						<Node score="0.24886332882273324">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="85.5"/>
+							<Node score="0.21796589658965893">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="70.5"/>
+								<Node score="0.24652439024390244">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="546.0"/>
+								</Node>
+							</Node>
+							<Node score="0.4076666666666666">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="10182.5"/>
+							</Node>
+						</Node>
+						<Node score="0.1968823529411765">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="106.5"/>
+							<Node score="0.2912069672131149">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="654.0"/>
+							</Node>
+						</Node>
+						<Node score="0.3244800995024876">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="157.5"/>
+						</Node>
+					</Node>
+					<Node score="0.015435971819312133">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="87.5"/>
+						<Node score="0.01336723163841805">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="43.5"/>
+							<Node score="0.0112793062200958">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="654.0"/>
+								<Node score="0.016982456140350887">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="286.0"/>
+									<Node score="0.01121782178217822">
+										<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="18151.5"/>
+									</Node>
+								</Node>
+								<Node score="0.006948275862068969">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="296.0"/>
+								</Node>
+							</Node>
+							<Node score="0.006500000000000001">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="656.5"/>
+								<Node score="0.02585714285714286">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="40.5"/>
+								</Node>
+							</Node>
+							<Node score="0.0085">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="657.5"/>
+							</Node>
+						</Node>
+						<Node score="0.034166666666666665">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="8707.0"/>
+							<Node score="0.022">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="51.5"/>
+								<Node score="0.019">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="48.0"/>
+								</Node>
+							</Node>
+							<Node score="0.0496">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="66.5"/>
+							</Node>
+						</Node>
+						<Node score="0.013893571042679673">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="55.5"/>
+							<Node score="0.01556521739130433">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="394.5"/>
+							</Node>
+						</Node>
+						<Node score="0.03486363636363638">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="408.0"/>
+						</Node>
+					</Node>
+					<Node score="0.018198487712665343">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="647.5"/>
+						<Node score="0.0115">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="246.0"/>
+							<Node score="0.046285714285714284">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="165.5"/>
+								<Node score="0.06333333333333334">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="155.0"/>
+								</Node>
+							</Node>
+							<Node score="0.026">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="171.0"/>
+							</Node>
+						</Node>
+						<Node score="0.02580198019801978">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="554.0"/>
+							<Node score="0.0191575342465753">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+							</Node>
+						</Node>
+						<Node score="0.012371794871794878">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="565.5"/>
+						</Node>
+					</Node>
+					<Node score="0.003">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="654.0"/>
+						<Node score="0.03319417475728153">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+							<Node score="0.059000000000000004">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="88.5"/>
+							</Node>
+						</Node>
+						<Node score="0.006500000000000001">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="94.0"/>
+						</Node>
+					</Node>
+					<Node score="0.007">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="662.5"/>
+						<Node score="0.015083333333333332">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="101.5"/>
+						</Node>
+					</Node>
+					<Node score="0.025944444444444437">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="676.0"/>
+					</Node>
+				</Node>
+				<Node score="0.304">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="58.5"/>
+					<Node score="0.3257142857142857">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="47.5"/>
+						<Node score="0.14875259156876294">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="606.5"/>
+							<Node score="0.1271512673753064">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="35.5"/>
+								<Node score="0.1221555555555556">
+									<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="18151.5"/>
+									<Node score="0.10278873239436617">
+										<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="31.5"/>
+									</Node>
+								</Node>
+								<Node score="0.16779487179487174">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="283.5"/>
+								</Node>
+							</Node>
+							<Node score="0.15437226277372262">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="540.5"/>
+								<Node score="0.13028571428571434">
+									<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="44.5"/>
+								</Node>
+							</Node>
+							<Node score="0.24116666666666667">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="541.5"/>
+							</Node>
+						</Node>
+						<Node score="0.14358928571428572">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="35.5"/>
+							<Node score="0.08759999999999998">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="643.5"/>
+								<Node score="0.13979154929577461">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="641.0"/>
+								</Node>
+							</Node>
+							<Node score="0.19397560975609754">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="656.5"/>
+							</Node>
+						</Node>
+						<Node score="0.1451851851851852">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="679.5"/>
+							<Node score="0.17014134275618367">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="659.5"/>
+							</Node>
+						</Node>
+						<Node score="0.19403225806451613">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="43.5"/>
+						</Node>
+					</Node>
+					<Node score="0.1750693877551021">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="643.5"/>
+						<Node score="0.20757142857142857">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="13166.5"/>
+							<Node score="0.1658">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="441.5"/>
+								<Node score="0.12059999999999997">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="305.0"/>
+								</Node>
+							</Node>
+							<Node score="0.3342631578947368">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="513.5"/>
+							</Node>
+						</Node>
+						<Node score="0.16399295774647893">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="537.5"/>
+							<Node score="0.13548648648648648">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="48.5"/>
+							</Node>
+						</Node>
+						<Node score="0.19612364760432782">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="595.5"/>
+						</Node>
+					</Node>
+					<Node score="0.2166">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="659.5"/>
+						<Node score="0.3243333333333333">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+							<Node score="0.2635909090909091">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="647.5"/>
+							</Node>
+						</Node>
+						<Node score="0.24933333333333332">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="51.5"/>
+						</Node>
+					</Node>
+					<Node score="0.1446923076923077">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="53.5"/>
+						<Node score="0.19845">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="50.5"/>
+						</Node>
+					</Node>
+					<Node score="0.20217391304347823">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+					</Node>
+				</Node>
+				<Node score="0.10966666666666665">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="90.5"/>
+					<Node score="0.2037103825136614">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="72.5"/>
+						<Node score="0.2189">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="547.5"/>
+							<Node score="0.1910384615384616">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="505.5"/>
+								<Node score="0.27699999999999997">
+									<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="289.5"/>
+								</Node>
+							</Node>
+							<Node score="0.30466000000000004">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+							</Node>
+						</Node>
+						<Node score="0.20717333333333351">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="29402.0"/>
+							<Node score="0.16024050632911394">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="582.5"/>
+							</Node>
+						</Node>
+						<Node score="0.22572448979591864">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+						</Node>
+					</Node>
+					<Node score="0.2568134920634921">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="682.0"/>
+						<Node score="0.25514035087719333">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="83.5"/>
+							<Node score="0.23582563025210074">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="599.0"/>
+							</Node>
+						</Node>
+						<Node score="0.3061578947368421">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="494.5"/>
+						</Node>
+					</Node>
+					<Node score="0.144">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="78.5"/>
+						<Node score="0.173">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="77.0"/>
+						</Node>
+					</Node>
+					<Node score="0.122">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="80.0"/>
+					</Node>
+				</Node>
+				<Node score="0.1292">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="143.5"/>
+					<Node score="0.35421875">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+						<Node score="0.32193023255813963">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="27731.0"/>
+							<Node score="0.2651021505376344">
+								<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="135.5"/>
+							</Node>
+						</Node>
+						<Node score="0.3115439999999999">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="644.5"/>
+						</Node>
+					</Node>
+					<Node score="0.3227142857142857">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="570.5"/>
+						<Node score="0.28975">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="100.5"/>
+						</Node>
+					</Node>
+					<Node score="0.23796226415094343">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="634.5"/>
+					</Node>
+				</Node>
+				<Node score="0.3253333333333333">
+					<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+					<Node score="0.30425">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="150.5"/>
+						<Node score="0.36860000000000004">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="28549.5"/>
+						</Node>
+					</Node>
+					<Node score="0.28675">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="156.5"/>
+					</Node>
+				</Node>
+				<Node score="0.3672380952380952">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="179.5"/>
+					<Node score="0.26535714285714285">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="429.0"/>
+					</Node>
+				</Node>
+				<Node score="0.36850000000000005">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="396.5"/>
+				</Node>
+			</Node>
+			<Node score="0.0565">
+				<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="45.5"/>
+				<Node score="0.053">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="214.5"/>
+				</Node>
+				<Node score="0.0014">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="37.5"/>
+					<Node score="0.002">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="257.0"/>
+						<Node score="0.049">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="33.5"/>
+						</Node>
+					</Node>
+					<Node score="0.005158536585365857">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="645.0"/>
+						<Node score="0.0073189823874754934">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+							<Node score="0.006072463768115946">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="320.5"/>
+							</Node>
+						</Node>
+						<Node score="0.010461538461538463">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="554.0"/>
+						</Node>
+					</Node>
+					<Node score="0.009461538461538462">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="679.5"/>
+						<Node score="0.02">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="27731.0"/>
+						</Node>
+					</Node>
+					<Node score="0.003833333333333333">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="28585.0"/>
+					</Node>
+				</Node>
+				<Node score="0.086">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="357.0"/>
+					<Node score="0.0037619047619047627">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="25437.0"/>
+						<Node score="0.01161538461538462">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="18151.5"/>
+							<Node score="0.005461538461538462">
+								<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="11433.5"/>
+							</Node>
+						</Node>
+						<Node score="0.011333333333333334">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="39.0"/>
+						</Node>
+					</Node>
+					<Node score="0.0465">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="43.0"/>
+						<Node score="0.064">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="39.5"/>
+						</Node>
+					</Node>
+				</Node>
+				<Node score="0.005869158878504676">
+					<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34979.5"/>
+					<Node score="0.009874999999999997">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="42.5"/>
+						<Node score="0.007591304347826069">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="615.5"/>
+						</Node>
+					</Node>
+					<Node score="0.008230769230769232">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="575.0"/>
+					</Node>
+				</Node>
+				<Node score="0.010747252747252753">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="657.0"/>
+					<Node score="0.007931506849315073">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="596.5"/>
+					</Node>
+				</Node>
+				<Node score="0.006">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="43.5"/>
+				</Node>
+			</Node>
+			<Node score="0.00932258064516129">
+				<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="73.5"/>
+				<Node score="0.083">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="235.5"/>
+				</Node>
+				<Node score="0.01174418604651163">
+					<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="33270.5"/>
+					<Node score="0.0315">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="46.5"/>
+						<Node score="0.06999999999999999">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="436.5"/>
+							<Node score="0.013">
+								<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="307.5"/>
+							</Node>
+						</Node>
+						<Node score="0.011666666666666669">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="617.0"/>
+						</Node>
+					</Node>
+					<Node score="0.018222222222222223">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="609.5"/>
+						<Node score="0.009863777089783244">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="68.5"/>
+						</Node>
+					</Node>
+					<Node score="0.019055555555555544">
+						<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="24681.0"/>
+					</Node>
+				</Node>
+				<Node score="0.007250000000000001">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="623.5"/>
+					<Node score="0.012875000000000003">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="70.5"/>
+						<Node score="0.00890909090909086">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="68.5"/>
+						</Node>
+					</Node>
+					<Node score="0.0028">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="559.0"/>
+					</Node>
+				</Node>
+				<Node score="0.0113125">
+					<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+					<Node score="0.003142857142857144">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="62.5"/>
+					</Node>
+				</Node>
+				<Node score="0.01545070422535211">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="629.0"/>
+				</Node>
+			</Node>
+			<Node score="0.01443771043771039">
+				<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="629.5"/>
+				<Node score="0.0032500000000000003">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="303.0"/>
+					<Node score="0.011">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="80.0"/>
+					</Node>
+					<Node score="0.0026000000000000003">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="158.0"/>
+						<Node score="0.006000000000000001">
+							<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="106.0"/>
+						</Node>
+					</Node>
+					<Node score="0.011">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="172.0"/>
+					</Node>
+				</Node>
+				<Node score="0.0275">
+					<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="27731.0"/>
+					<Node score="0.092">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="74.5"/>
+						<Node score="0.038">
+							<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="607.5"/>
+						</Node>
+					</Node>
+					<Node score="0.01585156249999998">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="144.5"/>
+					</Node>
+				</Node>
+				<Node score="0.009830188679245285">
+					<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="33270.5"/>
+					<Node score="0.003052631578947369">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="509.5"/>
+					</Node>
+				</Node>
+				<Node score="0.022734693877551015">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="532.5"/>
+				</Node>
+			</Node>
+			<Node score="0.0026923076923076926">
+				<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="676.0"/>
+				<Node score="0.045">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="85.5"/>
+					<Node score="0.015714285714285715">
+						<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="84.5"/>
+						<Node score="0.007789473684210526">
+							<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="34124.5"/>
+						</Node>
+					</Node>
+				</Node>
+				<Node score="0.011789473684210528">
+					<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="669.5"/>
+					<Node score="0.00622772277227723">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="654.5"/>
+					</Node>
+				</Node>
+				<Node score="0.004333333333333333">
+					<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="28585.0"/>
+				</Node>
+			</Node>
+			<Node score="0.014249999999999999">
+				<SimplePredicate field="double(RPM)" operator="lessOrEqual" value="28585.0"/>
+				<Node score="0.012">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="152.0"/>
+					<Node score="0.0035555555555555557">
+						<SimplePredicate field="double(RPS)" operator="lessOrEqual" value="682.0"/>
+					</Node>
+				</Node>
+				<Node score="0.034999999999999996">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="155.0"/>
+				</Node>
+			</Node>
+			<Node score="0.003">
+				<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="111.5"/>
+				<Node score="0.002">
+					<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="102.0"/>
+				</Node>
+			</Node>
+			<Node score="0.04666666666666666">
+				<SimplePredicate field="double(PR 1)" operator="lessOrEqual" value="120.0"/>
+			</Node>
+		</Node>
+	</TreeModel>
+</PMML>
