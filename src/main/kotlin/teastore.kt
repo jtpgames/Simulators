@@ -17,8 +17,8 @@ fun main()
     configureLogging("teastore")
 
     val predictor = Predictor(
-        "teastore_model_DT_03-05-2023.pmml",
-        "teastore_requests_mapping_DT_03-05-2023.json"
+        "teastore_model_DT_05-05-2023.pmml",
+        "teastore_requests_mapping_DT_ordinal_encoding.json"
     )
 
     val prefix = "/tools.descartes.teastore.webui/"

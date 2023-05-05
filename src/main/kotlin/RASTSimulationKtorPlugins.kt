@@ -192,6 +192,7 @@ class RASTSimulationKtorPlugins(
                 call.application.environment.log.debug("--> UID: $tid, $foundCommand: Skip waiting")
             }
 
+            call.application.environment.log.info("UID: $tid, CMD: $foundCommand, Pred. Processing Time: ${total_sleep_time * 1000} ms")
             call.response.header("X-Pred-Process-Time", total_sleep_time.toString())
         }
     }
