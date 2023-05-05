@@ -145,9 +145,11 @@ class RASTSimulationKtorPlugins(
             val stopwatch = call.attributes[getAttributeKeyFor<Stopwatch>("X-SW")]
 
             var total_sleep_time = 0.0
+            var total_predicted_sleep_time = 0.0
 
-            var elapsedTimeSeconds = stopwatch.elapsed().toMillis() / 1000.0
+            var elapsedTimeSeconds = stopwatch.elapsed().toNanos() / (1000.0 * 1000.0 * 1000.0)
             var sleep_time_to_use = predictor.predictSleepTime(tid, foundCommand)
+            total_predicted_sleep_time = sleep_time_to_use
             call.application.environment.log.debug("--> UID: $tid, $foundCommand: Elapsed time: ${elapsedTimeSeconds}s")
             call.application.environment.log.debug("--> UID: $tid, $foundCommand: Predicted processing time: ${sleep_time_to_use}s")
             sleep_time_to_use -= elapsedTimeSeconds
@@ -161,8 +163,10 @@ class RASTSimulationKtorPlugins(
 
                 for (i in IntStream.range(1, 2))
                 {
-                    elapsedTimeSeconds = stopwatch.elapsed().toMillis() / 1000.0
+                    elapsedTimeSeconds = stopwatch.elapsed().toNanos() / (1000.0 * 1000.0 * 1000.0)
                     var sleep_time_test = predictor.predictSleepTime(tid, foundCommand)
+                    total_predicted_sleep_time = max(total_predicted_sleep_time, sleep_time_test)
+
                     call.application.environment.log.debug("--> UID: $tid, $foundCommand: Elapsed time: ${elapsedTimeSeconds}s")
                     call.application.environment.log.debug("--> UID: $tid, $foundCommand: Predicted processing time: ${sleep_time_test}s")
                     sleep_time_test -= elapsedTimeSeconds
@@ -192,7 +196,7 @@ class RASTSimulationKtorPlugins(
                 call.application.environment.log.debug("--> UID: $tid, $foundCommand: Skip waiting")
             }
 
-            call.application.environment.log.info("UID: $tid, CMD: $foundCommand, Pred. Processing Time: ${total_sleep_time * 1000} ms")
+            call.application.environment.log.info("UID: $tid, CMD: $foundCommand, Pred. Processing Time: ${total_predicted_sleep_time * 1000} ms")
             call.response.header("X-Pred-Process-Time", total_sleep_time.toString())
         }
     }
