@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.4">
+	<Header>
+		<Application name="JPMML-SkLearn library" version="1.7.10"/>
+		<Timestamp>2023-05-06T18:28:40Z</Timestamp>
+	</Header>
+	<MiningBuildTask>
+		<Extension name="repr">PMMLPipeline(steps=[('estimator', GridSearchCV(estimator=Ridge(),
+             param_grid={'alpha': [0.001, 0.01, 0.1, 1.0, 10.0, 100.0],
+                         'fit_intercept': [True, False],
+                         'max_iter': [100, 1000, 2000], 'solver': ['auto']},
+             verbose=3))])</Extension>
+	</MiningBuildTask>
+	<DataDictionary>
+		<DataField name="Response Time s" optype="continuous" dataType="double"/>
+		<DataField name="PR 1" optype="continuous" dataType="double"/>
+		<DataField name="PR 3" optype="continuous" dataType="double"/>
+		<DataField name="Request Type" optype="continuous" dataType="double"/>
+	</DataDictionary>
+	<RegressionModel functionName="regression" algorithmName="sklearn.linear_model._ridge.Ridge">
+		<MiningSchema>
+			<MiningField name="Response Time s" usageType="target"/>
+			<MiningField name="PR 1"/>
+			<MiningField name="PR 3"/>
+			<MiningField name="Request Type"/>
+		</MiningSchema>
+		<RegressionTable intercept="0.0026760470158663716">
+			<NumericPredictor name="PR 1" coefficient="-4.637244046682628E-5"/>
+			<NumericPredictor name="PR 3" coefficient="0.0016202503647273782"/>
+			<NumericPredictor name="Request Type" coefficient="6.266738270991115E-4"/>
+		</RegressionTable>
+	</RegressionModel>
+</PMML>

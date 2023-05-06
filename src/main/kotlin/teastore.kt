@@ -17,7 +17,7 @@ fun main()
     configureLogging("teastore")
 
     val predictor = Predictor(
-        "teastore_model_DT_PR3_05-05-2023.pmml",
+        "teastore_model_DT_New_PR3.pmml",
         "teastore_requests_mapping_DT_ordinal_encoding.json"
     )
 
