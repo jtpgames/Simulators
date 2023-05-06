@@ -2,34 +2,35 @@
 <PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.4">
 	<Header>
 		<Application name="JPMML-SkLearn library" version="1.7.10"/>
-		<Timestamp>2023-04-30T16:46:07Z</Timestamp>
+		<Timestamp>2023-05-06T12:55:59Z</Timestamp>
 	</Header>
 	<MiningBuildTask>
-		<Extension name="repr">PMMLPipeline(steps=[('estimator', LinearRegression())])</Extension>
+		<Extension name="repr">PMMLPipeline(steps=[('estimator', GridSearchCV(estimator=Ridge(),
+             param_grid={'alpha': [0.001, 0.01, 0.1, 1.0, 10.0, 100.0],
+                         'fit_intercept': [True, False],
+                         'max_iter': [100, 1000, 2000], 'solver': ['auto']},
+             verbose=3))])</Extension>
 	</MiningBuildTask>
 	<DataDictionary>
 		<DataField name="Response Time s" optype="continuous" dataType="double"/>
 		<DataField name="PR 1" optype="continuous" dataType="double"/>
-		<DataField name="PR 3" optype="continuous" dataType="double"/>
 		<DataField name="Request Type" optype="continuous" dataType="double"/>
 		<DataField name="RPS" optype="continuous" dataType="double"/>
 		<DataField name="RPM" optype="continuous" dataType="double"/>
 	</DataDictionary>
-	<RegressionModel functionName="regression" algorithmName="sklearn.linear_model._base.LinearRegression">
+	<RegressionModel functionName="regression" algorithmName="sklearn.linear_model._ridge.Ridge">
 		<MiningSchema>
 			<MiningField name="Response Time s" usageType="target"/>
 			<MiningField name="PR 1"/>
-			<MiningField name="PR 3"/>
 			<MiningField name="Request Type"/>
 			<MiningField name="RPS"/>
 			<MiningField name="RPM"/>
 		</MiningSchema>
-		<RegressionTable intercept="0.013047847269897918">
-			<NumericPredictor name="PR 1" coefficient="7.833853399357998E-5"/>
-			<NumericPredictor name="PR 3" coefficient="0.0016606065058446448"/>
-			<NumericPredictor name="Request Type" coefficient="0.0014176734951284141"/>
-			<NumericPredictor name="RPS" coefficient="-5.574134347800064E-5"/>
-			<NumericPredictor name="RPM" coefficient="3.431541378741864E-7"/>
+		<RegressionTable intercept="-0.015353689935534452">
+			<NumericPredictor name="PR 1" coefficient="9.919724196485187E-4"/>
+			<NumericPredictor name="Request Type" coefficient="0.006589854621541331"/>
+			<NumericPredictor name="RPS" coefficient="1.4694955124610245E-5"/>
+			<NumericPredictor name="RPM" coefficient="1.614685692202445E-7"/>
 		</RegressionTable>
 	</RegressionModel>
 </PMML>
