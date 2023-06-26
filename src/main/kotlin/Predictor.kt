@@ -7,7 +7,6 @@ import org.jpmml.evaluator.EvaluatorUtil
 import org.jpmml.evaluator.LoadingModelEvaluatorBuilder
 import org.jpmml.evaluator.OutputField
 import org.slf4j.LoggerFactory
-import java.io.File
 import java.io.FileInputStream
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.time.Duration.Companion.minutes
@@ -41,15 +40,35 @@ class Predictor(
 
     init
     {
-        val pathToModel = "src/main/resources/$nameOfModel"
-        val pathToMapping = "src/main/resources/$nameOfMappingFile"
+        val pathToModel: String
+        var modelStream = javaClass.getResourceAsStream("/$nameOfModel")
+        if (modelStream == null)
+        {
+            log.debug("Using model file on the file system.")
+            pathToModel = "src/main/resources/$nameOfModel"
+            modelStream = FileInputStream(pathToModel)
+        } else
+        {
+            log.debug("Found model file as resource.")
+        }
 
-        knownRequestTypes = Json.decodeFromStream(FileInputStream(pathToMapping))
+        val mappingStream = javaClass.getResourceAsStream("/$nameOfMappingFile")
+        knownRequestTypes = if (mappingStream != null)
+        {
+            log.debug("Found mapping file as resource.")
+            Json.decodeFromStream(mappingStream)
+        } else
+        {
+            log.debug("Using mapping file on the file system.")
+            val pathToMapping = "src/main/resources/$nameOfMappingFile"
+            Json.decodeFromStream(FileInputStream(pathToMapping))
+        }
+
         log.debug(knownRequestTypes.toString())
 
         // Building a model evaluator from a PMML file
         evaluator = LoadingModelEvaluatorBuilder()
-            .load(File(pathToModel))
+            .load(modelStream)
             .build()
 
         // Performing the self-check
