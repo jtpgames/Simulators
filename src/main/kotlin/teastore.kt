@@ -6,26 +6,119 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.slf4j.LoggerFactory
 import java.nio.channels.FileChannel
 import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 import java.util.concurrent.TimeUnit
 import java.util.stream.IntStream.range
 
-fun main()
+enum class TeaStoreModelToUse
 {
+    // Decision Tree Regression with Request Type, PR 1, PR 3
+    `DT_T-PR_1_3`,
+    // Ridge Regression with Request Type, PR 1, PR 3
+    `Ridge_T-PR_1_3`,
+    // Decision Tree Regression with Request Type, PR 1, RPS, RPM
+    `DT_T-PR_1-RPS-RPM`,
+    // Ridge Regression with Request Type, PR 1, RPS, RPM
+    `Ridge_T-PR_1-RPS-RPM`,
+    // Decision Tree Regression with Request Type, PR 1, PR 3, RPS, RPM
+    `DT_T-PR_1_3-RPS-RPM`,
+    // Ridge Regression with Request Type, PR 1, PR 3, RPS, RPM
+    `Ridge_T-PR_1_3-RPS-RPM`,
+}
+
+fun printUsage() {
+    println("Usage: java -jar Rast-Simulator.jar [OPTIONS]")
+    println("Options:")
+    println("  -m <modelToUse>   Specify the model to use (" +
+            "0=DT_T_PR_1_3, 1=Ridge_T_PR_1_3, " +
+            "2=DT_T-PR_1-RPS-RPM, 3=Ridge_T-PR_1-RPS-RPM, " +
+            "4=DT_T-PR_1_3-RPS-RPM, 5=Ridge_T-PR_1_3-RPS-RPM" +
+            ")")
+    println("  -c <configFile>   Specify the config file to use")
+    println("  -h, --help        Print this help message")
+}
+
+fun main(args: Array<String>)
+{
+    val logger = LoggerFactory.getLogger("Main")
+
+    var modelToUse: TeaStoreModelToUse = TeaStoreModelToUse.`DT_T-PR_1_3-RPS-RPM`
+    var corr_max = 0
+
+    if (args.isNotEmpty() && (args[0] == "-h" || args[0] == "--help")) {
+        printUsage()
+        return
+    }
+
+    var i = 0
+    while (i < args.size)
+    {
+        when (args[i])
+        {
+            "-m" ->
+            {
+                if (i + 1 < args.size)
+                {
+                    val argValue = args[i + 1]
+                    val modelIndex = argValue.toIntOrNull()
+                    if (modelIndex != null && modelIndex in 0 until TeaStoreModelToUse.values().size) {
+                        modelToUse = TeaStoreModelToUse.values()[modelIndex]
+                    } else {
+                        throw IllegalArgumentException("Invalid value for -m argument: $argValue")
+                    }
+                    i += 2 // Skip the argument and its value
+                } else
+                {
+                    throw IllegalArgumentException("Missing value for -m argument.")
+                }
+            }
+            "-c" ->
+            {
+                if (i + 1 < args.size)
+                {
+                    corr_max = Integer.parseInt(args[i + 1])
+                    i += 2 // Skip the argument and its value
+                } else
+                {
+                    throw IllegalArgumentException("Missing value for -m argument.")
+                }
+            }
+            else ->
+            {
+                throw IllegalArgumentException("Unknown argument: ${args[i]}")
+            }
+        }
+    }
+
     configureLogging("teastore")
 
-    val predictor = Predictor(
-        "teastore_model_DT_New_PR3.pmml",
-        "teastore_requests_mapping_DT_ordinal_encoding.json"
-    )
+    logger.info("Using model $modelToUse")
+
+    val (nameOfModel, nameOfMappingFile) = when (modelToUse)
+    {
+        TeaStoreModelToUse.`DT_T-PR_1_3` -> Pair("teastore_model_DT_T_PR_1_3.pmml", "teastore_requests_mapping_DT_ordinal_encoding.json")
+        TeaStoreModelToUse.`Ridge_T-PR_1_3` -> Pair("teastore_model_Ridge_T_PR_1_3.pmml", "teastore_requests_mapping_LR_ordinal_encoding.json")
+        TeaStoreModelToUse.`DT_T-PR_1-RPS-RPM` -> Pair("teastore_model_DT_T-PR_1-RPS-RPM.pmml", "teastore_requests_mapping_DT_ordinal_encoding.json")
+        TeaStoreModelToUse.`Ridge_T-PR_1-RPS-RPM` -> Pair("teastore_model_Ridge_T-PR_1-RPS-RPM.pmml", "teastore_requests_mapping_LR_ordinal_encoding.json")
+        TeaStoreModelToUse.`DT_T-PR_1_3-RPS-RPM` -> Pair("teastore_model_DT_T-PR_1_3-RPS-RPM.pmml", "teastore_requests_mapping_DT_ordinal_encoding.json")
+        TeaStoreModelToUse.`Ridge_T-PR_1_3-RPS-RPM` -> Pair("teastore_model_Ridge_T-PR_1_3-RPS-RPM.pmml", "teastore_requests_mapping_LR_ordinal_encoding.json")
+    }
+
+    val predictor = Predictor(nameOfModel, nameOfMappingFile)
 
     val prefix = "/tools.descartes.teastore.webui/"
 
     val urlsToIgnoreInPlugins = listOf("/", "/logs/reset")
 
-    val rastSimulationKtorPlugins = RASTSimulationKtorPlugins(prefix, urlsToIgnoreInPlugins, predictor)
+    val rastSimulationKtorPlugins = RASTSimulationKtorPlugins(
+        prefix,
+        urlsToIgnoreInPlugins,
+        predictor,
+        corr_max
+    )
 
     ////////////////////////////////////////////////////////////////////////////
     // Ktor server

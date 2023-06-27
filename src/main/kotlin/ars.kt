@@ -10,10 +10,10 @@ enum class ModelToUse
 {
     // MASCOTS 2022 model
     MASCOTS2022,
-    // EPEW 2023 model with ordinal encoding
-    EPEW2023_ORDINAL,
-    // EPEW 2023 model with target encoding
-    EPEW2023_TARGET
+    // TBD 2023 model with ordinal encoding
+    TBD2023_ORDINAL,
+    // TBD 2023 model with target encoding
+    TBD2023_TARGET
 }
 
 val MODEL_TO_USE: ModelToUse = ModelToUse.MASCOTS2022
@@ -30,7 +30,7 @@ fun main()
                 "gs_requests_mapping_prod_workload.json"
             )
 
-        ModelToUse.EPEW2023_ORDINAL ->
+        ModelToUse.TBD2023_ORDINAL ->
             Predictor(
                 "gs_model_Ridge_18-03-2023.pmml",
                 "gs_requests_mapping_Ridge_18-03-2023.json",
@@ -39,7 +39,7 @@ fun main()
                 )
             )
 
-        ModelToUse.EPEW2023_TARGET ->
+        ModelToUse.TBD2023_TARGET ->
             Predictor(
                 "gs_model_Ridge_target_encoding_20-03-2023.pmml",
                 "gs_requests_mapping_Ridge_target_encoding_20-03-2023.json",

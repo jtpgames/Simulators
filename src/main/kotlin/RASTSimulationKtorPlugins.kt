@@ -11,7 +11,8 @@ import java.util.stream.IntStream
 class RASTSimulationKtorPlugins(
     prefix: String,
     urlsToIgnoreInPlugins: List<String>,
-    predictor: Predictor
+    predictor: Predictor,
+    corr_max: Int = 0
 )
 {
     private val addProcessTimeHeaderPlugin: ApplicationPlugin<Unit> = createApplicationPlugin(name = "addProcessTimeHeaderPlugin") {
@@ -161,7 +162,7 @@ class RASTSimulationKtorPlugins(
                 delay((sleep_time_to_use * 1000).toLong())
                 total_sleep_time += sleep_time_to_use
 
-                for (i in IntStream.range(1, 2))
+                for (i in IntStream.range(1, 1+corr_max))
                 {
                     elapsedTimeSeconds = stopwatch.elapsed().toNanos() / (1000.0 * 1000.0 * 1000.0)
                     var sleep_time_test = predictor.predictSleepTime(tid, foundCommand)
