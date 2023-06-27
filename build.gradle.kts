@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "me.juritomak"
-version = "1.0"
+version = "0.2.0"
 
 repositories {
     mavenCentral()
@@ -34,6 +34,14 @@ tasks.test {
 
 java.sourceCompatibility = JavaVersion.VERSION_11
 java.targetCompatibility = JavaVersion.VERSION_11
+
+tasks.jar {
+    manifest {
+        attributes["Implementation-Version"] = project.version
+        attributes["Implementation-Title"] = "RAST Simulator"
+    }
+}
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
