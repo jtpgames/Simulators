@@ -6,7 +6,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import java.util.concurrent.TimeUnit
 
-enum class ModelToUse
+enum class ARSModelToUse
 {
     // MASCOTS 2022 model
     MASCOTS2022,
@@ -16,7 +16,7 @@ enum class ModelToUse
     TBD2023_TARGET
 }
 
-val MODEL_TO_USE: ModelToUse = ModelToUse.MASCOTS2022
+val MODEL_TO_USE: ARSModelToUse = ARSModelToUse.MASCOTS2022
 
 fun main()
 {
@@ -24,13 +24,13 @@ fun main()
 
     val predictor = when (MODEL_TO_USE)
     {
-        ModelToUse.MASCOTS2022 ->
+        ARSModelToUse.MASCOTS2022 ->
             Predictor(
                 "gs_model_LR_03-11-2022.pmml",
                 "gs_requests_mapping_prod_workload.json"
             )
 
-        ModelToUse.TBD2023_ORDINAL ->
+        ARSModelToUse.TBD2023_ORDINAL ->
             Predictor(
                 "gs_model_Ridge_18-03-2023.pmml",
                 "gs_requests_mapping_Ridge_18-03-2023.json",
@@ -39,7 +39,7 @@ fun main()
                 )
             )
 
-        ModelToUse.TBD2023_TARGET ->
+        ARSModelToUse.TBD2023_TARGET ->
             Predictor(
                 "gs_model_Ridge_target_encoding_20-03-2023.pmml",
                 "gs_requests_mapping_Ridge_target_encoding_20-03-2023.json",
