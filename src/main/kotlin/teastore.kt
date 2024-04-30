@@ -33,11 +33,11 @@ fun printUsage() {
     println("Usage: java -jar Rast-Simulator.jar [OPTIONS]")
     println("Options:")
     println("  -m <modelToUse>   Specify the model to use (" +
-            "0=DT_T_PR_1_3, 1=Ridge_T_PR_1_3, " +
+            "0=DT_T-PR_1_3, 1=Ridge_T-PR_1_3, " +
             "2=DT_T-PR_1-RPS-RPM, 3=Ridge_T-PR_1-RPS-RPM, " +
             "4=DT_T-PR_1_3-RPS-RPM, 5=Ridge_T-PR_1_3-RPS-RPM" +
             ")")
-    println("  -c <configFile>   Specify the config file to use")
+    println("  -c <corr_max>     Specify the value for corr_max to use. Defaults to 0")
     println("  -h, --help        Print this help message")
 }
 
@@ -45,7 +45,7 @@ fun main(args: Array<String>)
 {
     val logger = LoggerFactory.getLogger("Main")
 
-    var modelToUse: TeaStoreModelToUse = TeaStoreModelToUse.`DT_T-PR_1_3-RPS-RPM`
+    var modelToUse: TeaStoreModelToUse = TeaStoreModelToUse.`Ridge_T-PR_1_3`
     var corr_max = 0
 
     if (args.isNotEmpty() && (args[0] == "-h" || args[0] == "--help")) {
@@ -83,7 +83,7 @@ fun main(args: Array<String>)
                     i += 2 // Skip the argument and its value
                 } else
                 {
-                    throw IllegalArgumentException("Missing value for -m argument.")
+                    throw IllegalArgumentException("Missing value for -c argument.")
                 }
             }
             else ->
