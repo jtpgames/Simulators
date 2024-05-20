@@ -28,3 +28,17 @@ To adjust the predictive model for either the ARS or the TeaStore Simulator, fol
     - Locate the `modelToUse` variable and change its default value.
     - The available models and mappings can be found in the following folder: `<your_local_simulators_folder>/src/main/resources`.
       Look for files starting with the word "teastore".
+
+# How to Adjust the Maximum Number of Corrections (corr_max)
+
+The corr_max value is passed to the constructor of the class `RASTSimulationKtorPlugins`. Follow these steps:
+
+1. For ARS Simulator:
+	- Navigate to the `ars.kt` file.
+	- Locate the line `val rastSimulationKtorPlugins = RASTSimulationKtorPlugins(prefix, urlsToIgnoreInPlugins, predictor)`
+    - Pass your desired corr_max value, such as `val rastSimulationKtorPlugins = RASTSimulationKtorPlugins(prefix, urlsToIgnoreInPlugins, predictor, 1)`
+
+1. For TeaStore Simulator:
+    - Navigate to the `teastore.kt` file.
+	- Locate the line `var corr_max = 0`
+    - Set your desired corr_max value, such as `var corr_max = 1`.
