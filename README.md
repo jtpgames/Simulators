@@ -29,16 +29,23 @@ To adjust the predictive model for either the ARS or the TeaStore Simulator, fol
     - The available models and mappings can be found in the following folder: `<your_local_simulators_folder>/src/main/resources`.
       Look for files starting with the word "teastore".
 
+# How to Use a Custom Predictive Model
+## Quick way (override an existing model)
+* rename your model file (.pmml) and the request type mapping file (.json) to match an existing model, e.g.:
+    * for a ridge regression model for the TeaStore simulator that uses PR 1, PR 2 and Request Type as predictor variables: `predictive_model_Ridge_09-12-2023_09:11:49.pmml` => `teastore_model_Ridge_T_PR_1_3.pmml`.
+    * for a mapping file for the TeaStore simulator that uses ordinal encoding: `requests_mapping_09-12-2023_09:11:49.json` => `teastore_requests_mapping_LR_ordinal_encoding.json` 
+* copy the model file and the request type mapping file to `<your_local_simulators_folder>/src/main/resources` and overwrite the existing files (backup the old files if you like).
+
 # How to Adjust the Maximum Number of Corrections (corr_max)
 
 The corr_max value is passed to the constructor of the class `RASTSimulationKtorPlugins`. Follow these steps:
 
 1. For ARS Simulator:
-	- Navigate to the `ars.kt` file.
-	- Locate the line `val rastSimulationKtorPlugins = RASTSimulationKtorPlugins(prefix, urlsToIgnoreInPlugins, predictor)`
+    - Navigate to the `ars.kt` file.
+    - Locate the line `val rastSimulationKtorPlugins = RASTSimulationKtorPlugins(prefix, urlsToIgnoreInPlugins, predictor)`
     - Pass your desired corr_max value, such as `val rastSimulationKtorPlugins = RASTSimulationKtorPlugins(prefix, urlsToIgnoreInPlugins, predictor, 1)`
 
-1. For TeaStore Simulator:
+2. For TeaStore Simulator:
     - Navigate to the `teastore.kt` file.
-	- Locate the line `var corr_max = 0`
+    - Locate the line `var corr_max = 0`
     - Set your desired corr_max value, such as `var corr_max = 1`.
