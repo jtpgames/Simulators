@@ -30,11 +30,32 @@ To adjust the predictive model for either the ARS or the TeaStore Simulator, fol
       Look for files starting with the word "teastore".
 
 # How to Use a Custom Predictive Model
-## Quick way (override an existing model)
-* rename your model file (.pmml) and the request type mapping file (.json) to match an existing model, e.g.:
-    * for a ridge regression model for the TeaStore simulator that uses PR 1, PR 2 and Request Type as predictor variables: `predictive_model_Ridge_09-12-2023_09:11:49.pmml` => `teastore_model_Ridge_T_PR_1_3.pmml`.
-    * for a mapping file for the TeaStore simulator that uses ordinal encoding: `requests_mapping_09-12-2023_09:11:49.json` => `teastore_requests_mapping_LR_ordinal_encoding.json` 
-* copy the model file and the request type mapping file to `<your_local_simulators_folder>/src/main/resources` and overwrite the existing files (backup the old files if you like).
+
+## Quick Way (Override an Existing Model)
+
+1. Rename your model file (.pmml) and the request type mapping file (.json) to match an existing model. For example:
+   - For a ridge regression model for the TeaStore simulator that uses PR 1, PR 2, and Request Type as predictor variables:
+       ``` 
+       predictive_model_Ridge_09-12-2023_09:11:49.pmml 
+       ```
+     Rename to:
+       ```
+       teastore_model_Ridge_T_PR_1_3.pmml
+       ```
+   - For a mapping file for the TeaStore simulator that uses ordinal encoding:
+       ```
+       requests_mapping_09-12-2023_09:11:49.json
+       ```
+     Rename to:
+       ```
+       teastore_requests_mapping_LR_ordinal_encoding.json
+       ```
+
+2. Copy the renamed model file and the request type mapping file to:
+    ```
+    <your_local_simulators_folder>/src/main/resources
+    ```
+   Overwrite the existing files. (Backup the old files if you like.)
 
 # How to Adjust the Maximum Number of Corrections (corr_max)
 
