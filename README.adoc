@@ -31,39 +31,47 @@ To adjust the predictive model for either the ARS or the TeaStore Simulator, fol
 * Locate the `modelToUse` variable and change its default value.
 * The available models and mappings can be found in the following folder: `<your_local_simulators_folder>/src/main/resources`. Look for files starting with the word "teastore".
 
-# How to Use a Custom Predictive Model
-
-## Quick Way (Override an Existing Model)
-
-1. Rename your model file (.pmml) and the request type mapping file (.json) to match an existing model. For example:
-   - For a ridge regression model for the TeaStore simulator that uses PR 1, PR 2, and Request Type as predictor variables:
-       ``` 
-       predictive_model_Ridge_09-12-2023_09:11:49.pmml 
-       ```
-     Rename to:
-       ```
-       teastore_model_Ridge_T_PR_1_3.pmml
-       ```
-   - For a mapping file for the TeaStore simulator that uses ordinal encoding:
-       ```
-       requests_mapping_09-12-2023_09:11:49.json
-       ```
-     Rename to:
-       ```
-       teastore_requests_mapping_LR_ordinal_encoding.json
-       ```
-
-2. Copy the renamed model file and the request type mapping file to:
-    ```
-    <your_local_simulators_folder>/src/main/resources
-    ```
-   Overwrite the existing files. (Backup the old files if you like.)
+== How to Use a Custom Predictive Model
 
 === Quick Way (Override an Existing Model)
-* Rename your model file (.pmml) and the request type mapping file (.json) to match an existing model, e.g.:
-* For a ridge regression model for the TeaStore simulator that uses PR 1, PR 2, and Request Type as predictor variables: `predictive_model_Ridge_09-12-2023_09:11:49.pmml` => `teastore_model_Ridge_T_PR_1_3.pmml`.
-* For a mapping file for the TeaStore simulator that uses ordinal encoding: `requests_mapping_09-12-2023_09:11:49.json` => `teastore_requests_mapping_LR_ordinal_encoding.json`
-* Copy the model file and the request type mapping file to `<your_local_simulators_folder>/src/main/resources` and overwrite the existing files (backup the old files if you like).
+
+. Rename your model file (.pmml) and the request type mapping file (.json) to match an existing model. For example:
+    * For a ridge regression model for the TeaStore simulator that uses PR 1, PR 2, and Request Type as predictor variables:
++
+[source]
+----
+predictive_model_Ridge_09-12-2023_09:11:49.pmml
+----
++
+Rename to:
++
+[source]
+----
+teastore_model_Ridge_T_PR_1_3.pmml
+----
+
+    * For a mapping file for the TeaStore simulator that uses ordinal encoding:
++
+[source]
+----
+requests_mapping_09-12-2023_09:11:49.json
+----
++
+Rename to:
++
+[source]
+----
+teastore_requests_mapping_LR_ordinal_encoding.json
+----
+
+. Copy the renamed model file and the request type mapping file to:
++
+[source]
+----
+<your_local_simulators_folder>/src/main/resources
+----
++
+Overwrite the existing files. (Backup the old files if you like.)
 
 == How to Adjust the Maximum Number of Corrections (corr_max)
 
@@ -83,7 +91,7 @@ The `corr_max` value is passed to the constructor of the class `RASTSimulationKt
 
 The Simulator consists of two main components: an API part that implements the system-specific API of your System Under Evaluation (SUE), and a Prediction part that implements our system-agnostic simulation. To create a new Simulator, you need to implement the API part and reuse the Prediction part.
 
-We recommend using the Ktor library to implement the API module. You can refer to the `ars.kt` or `teastore.kt` files located in the `<your_local_simulators_folder>/src/main/kotlin` folder for examples of how to implement the API endpoints. The Prediction module is provided as a series of Ktor plugins, making integration straightforward with just two lines of code:
+We recommend using the Ktor library to implement the API module. You can refer to the `ars.kt` or `teastore.kt` files located in the `<your_local_simulators_folder>/src/main/kotlin` folder for examples of how to implement the API endpoints. The Prediction module is provided as a series of Ktor plugins, making integration straightforward with just a few lines of code:
 
 .Minimal Ktor setup with the Prediction module installed
 [source, kotlin]
