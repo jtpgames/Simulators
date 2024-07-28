@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "me.juritomak"
-version = "0.2.0"
+version = "0.3.0"
 
 repositories {
     mavenCentral()
@@ -23,7 +23,9 @@ dependencies {
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
     implementation("io.ktor:ktor-server-call-logging:$ktor_version")
-    implementation("ch.qos.logback:logback-classic:1.4.5")
+    implementation("ch.qos.logback:logback-classic:1.4.12")
+
+    implementation("com.xenomachina:kotlin-argparser:2.0.7")
 
     testImplementation(kotlin("test"))
 }

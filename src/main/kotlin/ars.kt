@@ -1,3 +1,6 @@
+import com.xenomachina.argparser.ArgParser
+import com.xenomachina.argparser.default
+import com.xenomachina.argparser.mainBody
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
@@ -12,92 +15,123 @@ enum class ARSModelToUse
     MASCOTS2022,
     GS_RIDGE_ORDINAL,
     GS_DT_ORDINAL,
+
     // TBD 2023 model with ordinal encoding
     TBD2023_ORDINAL,
+
     // TBD 2023 model with target encoding
-    TBD2023_TARGET
+    TBD2023_TARGET;
+
+    companion object
+    {
+        fun fromInt(value: Int) = ARSModelToUse
+            .values()
+            .first { it.ordinal == value }
+    }
 }
 
-val MODEL_TO_USE: ARSModelToUse = ARSModelToUse.MASCOTS2022
-
-fun main()
+class ARSArgs(parser: ArgParser)
 {
-    configureLogging("ars")
+    val modelToUse by parser
+        .storing(
+            "-m", "--modelToUse",
+            help = "name of the user",
+            transform = { ARSModelToUse.fromInt(this.toInt()) }
+        )
+        .default(ARSModelToUse.MASCOTS2022)
 
-    val predictor = when (MODEL_TO_USE)
-    {
-        ARSModelToUse.MASCOTS2022 ->
-            Predictor(
-                "gs_model_LR_03-11-2022.pmml",
-                "gs_requests_mapping_prod_workload.json"
-            )
+    val corrMax by parser
+        .storing(
+            "-c", "--corr_max",
+            help = "Specify the value for corr_max to use. Defaults to 0",
+            transform = { toInt() }
+        )
+        .default(0)
+}
 
-        ARSModelToUse.GS_RIDGE_ORDINAL ->
-            Predictor(
-                "gs_model_Ridge_T_PR_1_3.pmml",
-                "gs_requests_mapping_LR_ordinal_encoding.json"
-            )
+fun main(args: Array<String>) = mainBody {
+    ArgParser(args)
+        .parseInto(::ARSArgs)
+        .run {
+            configureLogging("ars")
 
-        ARSModelToUse.GS_DT_ORDINAL ->
-            Predictor(
-                "gs_model_DT_T_PR_1_3.pmml",
-                "gs_requests_mapping_DT_ordinal_encoding.json"
-            )
-
-        ARSModelToUse.TBD2023_ORDINAL ->
-            Predictor(
-                "gs_model_Ridge_18-03-2023.pmml",
-                "gs_requests_mapping_Ridge_18-03-2023.json",
-                mapOf(
-                    Pair("PR 1", "pr_1"), Pair("PR 3", "pr_3"), Pair("Request Type", "cmd")
-                )
-            )
-
-        ARSModelToUse.TBD2023_TARGET ->
-            Predictor(
-                "gs_model_Ridge_target_encoding_20-03-2023.pmml",
-                "gs_requests_mapping_Ridge_target_encoding_20-03-2023.json",
-                mapOf(
-                    Pair("PR 1", "pr_1"), Pair("PR 3", "pr_3"), Pair("Request Type", "cmd_target_encoding")
-                )
-            )
-    }
-
-    val prefix = "/"
-
-    val urlsToIgnoreInPlugins = listOf("/")
-
-    val rastSimulationKtorPlugins = RASTSimulationKtorPlugins(prefix, urlsToIgnoreInPlugins, predictor)
-
-    val server = embeddedServer(
-        Netty,
-        host = "0.0.0.0",
-        port = 1337,
-        /*configure = {
-            connectionGroupSize = 2
-            workerGroupSize = 2
-            callGroupSize = 1
-            requestQueueLimit = 16
-            shareWorkGroup = false
-        }*/
-    ) {
-        rastSimulationKtorPlugins.installAllPlugins(this)
-        install(CallLogging) {
-            disableDefaultColors()
-        }
-
-        routing {
-            for (requestType in predictor.knownRequestTypes)
+            val predictor = when (modelToUse)
             {
-                post(requestType.key) {
-                    call.application.environment.log.info("GET ${requestType.key}")
-                    call.respondText("Success")
-                }
+                ARSModelToUse.MASCOTS2022 ->
+                    Predictor(
+                        "gs_model_LR_03-11-2022.pmml",
+                        "gs_requests_mapping_prod_workload.json"
+                    )
+
+                ARSModelToUse.GS_RIDGE_ORDINAL ->
+                    Predictor(
+                        "gs_model_Ridge_T_PR_1_3.pmml",
+                        "gs_requests_mapping_LR_ordinal_encoding.json"
+                    )
+
+                ARSModelToUse.GS_DT_ORDINAL ->
+                    Predictor(
+                        "gs_model_DT_T_PR_1_3.pmml",
+                        "gs_requests_mapping_DT_ordinal_encoding.json"
+                    )
+
+                ARSModelToUse.TBD2023_ORDINAL ->
+                    Predictor(
+                        "gs_model_Ridge_18-03-2023.pmml",
+                        "gs_requests_mapping_Ridge_18-03-2023.json",
+                        mapOf(
+                            Pair("PR 1", "pr_1"), Pair("PR 3", "pr_3"), Pair("Request Type", "cmd")
+                        )
+                    )
+
+                ARSModelToUse.TBD2023_TARGET ->
+                    Predictor(
+                        "gs_model_Ridge_target_encoding_20-03-2023.pmml",
+                        "gs_requests_mapping_Ridge_target_encoding_20-03-2023.json",
+                        mapOf(
+                            Pair("PR 1", "pr_1"), Pair("PR 3", "pr_3"), Pair("Request Type", "cmd_target_encoding")
+                        )
+                    )
             }
+
+            val prefix = "/"
+
+            val urlsToIgnoreInPlugins = listOf("/")
+
+            val rastSimulationKtorPlugins = RASTSimulationKtorPlugins(prefix, urlsToIgnoreInPlugins, predictor, corrMax)
+
+            val server = embeddedServer(
+                Netty,
+                host = "0.0.0.0",
+                port = 1337,
+                /*configure = {
+                    connectionGroupSize = 2
+                    workerGroupSize = 2
+                    callGroupSize = 1
+                    requestQueueLimit = 16
+                    shareWorkGroup = false
+                }*/
+            ) {
+                rastSimulationKtorPlugins.installAllPlugins(this)
+                install(CallLogging) {
+                    disableDefaultColors()
+                }
+
+                routing {
+                    for (requestType in predictor.knownRequestTypes)
+                    {
+                        post(requestType.key) {
+                            call.application.environment.log.info("GET ${requestType.key}")
+                            call.respondText("Success")
+                        }
+                    }
+                }
+            }.start(wait = false)
+            Runtime.getRuntime()
+                .addShutdownHook(Thread {
+                    server.stop(1, 5, TimeUnit.SECONDS)
+                })
+            Thread.currentThread()
+                .join()
         }
-    }.start(wait = false)
-    Runtime.getRuntime().addShutdownHook(Thread {
-        server.stop(1, 5, TimeUnit.SECONDS)
-    })
-    Thread.currentThread().join()
 }
