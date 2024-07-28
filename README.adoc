@@ -12,24 +12,27 @@ This repository contains proof-of-concept implementations of the RAST (introduce
 To start the Simulator, follow these steps:
 
 1. Navigate to your local Simulator folder.
-2. Execute the command `./gradlew run`.
-3. The specific Simulator to start is defined in the `build.gradle.kts` file on the line `mainClass.set("TeastoreKt")`.
-4. If the Simulator starts successfully, you will see the following line printed on the console: `INFO ktor.application - Responding at http://0.0.0.0:8081`.
-5. To terminate the Simulator, press `Ctrl + C`.
+2. Execute the command `./gradlew run -PmainClass=<simulator>` where <simulator> is the Simulator you want to start:
+    * For ARS, use `-PmainClass=ArsKt`
+    * For TeaStore, use `-PmainClass=TeastoreKt`
+3. If the Simulator starts successfully, you will see the following line printed on the console: `INFO ktor.application - Responding at http://0.0.0.0:8081`.
+4. To terminate the Simulator, press `Ctrl + C`.
+
+Use `./gradlew run -PmainClass=<simulator> --args="--help"` to show optional CLI arguments.
 
 == How to Adjust the Predictive Model
 
 To adjust the predictive model for either the ARS or the TeaStore Simulator, follow these steps:
 
-1. For ARS Simulator:
-* Navigate to the `ars.kt` file.
-* Locate the `MODEL_TO_USE` variable and change its default value.
-* The available models and mappings can be found in the following folder: `<your_local_simulators_folder>/src/main/resources`. Look for files starting with the word "gs".
-
-2. For TeaStore Simulator:
-* Navigate to the `teastore.kt` file.
-* Locate the `modelToUse` variable and change its default value.
-* The available models and mappings can be found in the following folder: `<your_local_simulators_folder>/src/main/resources`. Look for files starting with the word "teastore".
+1. Locate the ordinal number of your desired model:
+    * For ARS Simulator:
+        ** Navigate to the `ars.kt` file.
+        ** Locate the `ARSModelToUse` enum class showing the available models.
+        ** Pass the ordinal number of the desired model as a CLI argument, like `./gradlew run -PmainClass=ArsKt --args="-m <ordinal_number>"`
+    * For TeaStore Simulator:
+        ** Navigate to the `teastore.kt` file.
+        ** Locate the `TeaStoreModelToUse` enum class showing the available models.
+        ** Pass the ordinal number of the desired model as a CLI argument, like `./gradlew run -PmainClass=TeastoreKt --args="-m <ordinal_number>"`
 
 == How to Use a Custom Predictive Model
 
@@ -75,17 +78,9 @@ Overwrite the existing files. (Backup the old files if you like.)
 
 == How to Adjust the Maximum Number of Corrections (corr_max)
 
-The `corr_max` value is passed to the constructor of the class `RASTSimulationKtorPlugins`. Follow these steps:
+The corr_max value (default 0) can be adjusted via the CLI:
 
-1. For ARS Simulator:
-* Navigate to the `ars.kt` file.
-* Locate the line `val rastSimulationKtorPlugins = RASTSimulationKtorPlugins(prefix, urlsToIgnoreInPlugins, predictor)`
-* Pass your desired `corr_max` value, such as `val rastSimulationKtorPlugins = RASTSimulationKtorPlugins(prefix, urlsToIgnoreInPlugins, predictor, 1)`
-
-2. For TeaStore Simulator:
-* Navigate to the `teastore.kt` file.
-* Locate the line `var corr_max = 0`
-* Set your desired `corr_max` value, such as `var corr_max = 1`.
+`./gradlew run -PmainClass=<simulator> --args="-c <corr_max>"`
 
 == How to implement a new Simulator
 
