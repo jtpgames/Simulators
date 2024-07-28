@@ -48,7 +48,9 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClass.set("TeastoreKt")
+    val mainClassProperty: String = project.findProperty("mainClass") as String? ?: "TeastoreKt"
+
+    mainClass.set(mainClassProperty)
 }
 
 ktor {
