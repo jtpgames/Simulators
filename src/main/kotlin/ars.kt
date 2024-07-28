@@ -10,6 +10,8 @@ enum class ARSModelToUse
 {
     // MASCOTS 2022 model
     MASCOTS2022,
+    GS_RIDGE_ORDINAL,
+    GS_DT_ORDINAL,
     // TBD 2023 model with ordinal encoding
     TBD2023_ORDINAL,
     // TBD 2023 model with target encoding
@@ -28,6 +30,18 @@ fun main()
             Predictor(
                 "gs_model_LR_03-11-2022.pmml",
                 "gs_requests_mapping_prod_workload.json"
+            )
+
+        ARSModelToUse.GS_RIDGE_ORDINAL ->
+            Predictor(
+                "gs_model_Ridge_T_PR_1_3.pmml",
+                "gs_requests_mapping_LR_ordinal_encoding.json"
+            )
+
+        ARSModelToUse.GS_DT_ORDINAL ->
+            Predictor(
+                "gs_model_DT_T_PR_1_3.pmml",
+                "gs_requests_mapping_DT_ordinal_encoding.json"
             )
 
         ARSModelToUse.TBD2023_ORDINAL ->
