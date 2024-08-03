@@ -7,6 +7,7 @@ import io.ktor.server.netty.*
 import io.ktor.server.plugins.callloging.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
 
 enum class ARSModelToUse
@@ -35,7 +36,7 @@ class ARSArgs(parser: ArgParser)
     val modelToUse by parser
         .storing(
             "-m", "--modelToUse",
-            help = "name of the user",
+            help = "index of the model in the `ARSModelToUse` enum.",
             transform = { ARSModelToUse.fromInt(this.toInt()) }
         )
         .default(ARSModelToUse.MASCOTS2022)
@@ -54,6 +55,10 @@ fun main(args: Array<String>) = mainBody {
         .parseInto(::ARSArgs)
         .run {
             configureLogging("ars")
+
+            val logger = LoggerFactory.getLogger("Main")
+
+            logger.info("Using model $modelToUse")
 
             val predictor = when (modelToUse)
             {
