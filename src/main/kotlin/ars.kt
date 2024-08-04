@@ -17,11 +17,11 @@ enum class ARSModelToUse
     GS_RIDGE_ORDINAL,
     GS_DT_ORDINAL,
 
-    // TBD 2023 model with ordinal encoding
-    TBD2023_ORDINAL,
+    // SIMUtools 2023 model with ordinal encoding
+    SIMUTOOLS2023_ORDINAL,
 
-    // TBD 2023 model with target encoding
-    TBD2023_TARGET;
+    // SIMUtools 2023 model with target encoding
+    SIMUTOOLS2023_TARGET;
 
     companion object
     {
@@ -80,7 +80,7 @@ fun main(args: Array<String>) = mainBody {
                         "gs_requests_mapping_DT_ordinal_encoding.json"
                     )
 
-                ARSModelToUse.TBD2023_ORDINAL ->
+                ARSModelToUse.SIMUTOOLS2023_ORDINAL ->
                     Predictor(
                         "gs_model_Ridge_18-03-2023.pmml",
                         "gs_requests_mapping_Ridge_18-03-2023.json",
@@ -89,7 +89,7 @@ fun main(args: Array<String>) = mainBody {
                         )
                     )
 
-                ARSModelToUse.TBD2023_TARGET ->
+                ARSModelToUse.SIMUTOOLS2023_TARGET ->
                     Predictor(
                         "gs_model_Ridge_target_encoding_20-03-2023.pmml",
                         "gs_requests_mapping_Ridge_target_encoding_20-03-2023.json",
