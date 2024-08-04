@@ -70,13 +70,13 @@ fun main(args: Array<String>) = mainBody {
 
                 ARSModelToUse.GS_RIDGE_ORDINAL ->
                     Predictor(
-                        "gs_model_Ridge_T_PR_1_3.pmml",
+                        "gs_model_Ridge.pmml",
                         "gs_requests_mapping_LR_ordinal_encoding.json"
                     )
 
                 ARSModelToUse.GS_DT_ORDINAL ->
                     Predictor(
-                        "gs_model_DT_T_PR_1_3.pmml",
+                        "gs_model_DT.pmml",
                         "gs_requests_mapping_DT_ordinal_encoding.json"
                     )
 
